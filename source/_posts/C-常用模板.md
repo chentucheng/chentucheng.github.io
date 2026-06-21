@@ -1,7 +1,9 @@
 ---
 title: C++常用模板
 date: 2026-06-21 16:26:43
-tags:
+tags: C++
+description: |
+    Normal _Italic_ **Strong**
 ---
 # C++常用模板
 ## 1.KMP
