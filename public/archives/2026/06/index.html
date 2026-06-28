@@ -45,6 +45,8 @@
 
 
 
+<script src="/js/lib/search.js"></script>
+
 
 
 <link rel="stylesheet" href="/css/main.css" />
@@ -158,6 +160,8 @@
             
 <div id="archives">
     
+    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
+    
     <div id="timeline-wrap" ref="timeline">
         
         <div class="timeline" data-title="c++常用模板">
@@ -178,7 +182,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/C/" style="color: #03a9f4">
+                            <a href="/tags/C/" style="color: #00bcd4">
                                 C++
                             </a>
                         </span>
@@ -207,7 +211,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/Photo/" style="color: #00bcd4">
+                            <a href="/tags/Photo/" style="color: #00a596">
                                 Photo
                             </a>
                         </span>
