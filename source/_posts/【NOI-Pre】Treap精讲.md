@@ -7,5 +7,5 @@ description: |
 ---
 ###### By XXS
 ## 1.Treap是什么？
-[![oiwiki](./images/OI-Wiki)](https://oi-wiki.org/ds/treap/)
+[![oiwiki](./images/OI-Wiki.png)](https://oi-wiki.org/ds/treap/)
 顾名思义，Tree+Heap（树+堆），整棵树的点权遵循左小右大的原则
