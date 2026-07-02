@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | XXS-Blog</title>
+    <title>tags | XXS-Blog</title>
     <meta name="author" content="XXS" />
     <meta name="description" content="你想要的，这里…有点难说" />
     <meta name="keywords" content="C++,游记,生活,Techno,Photo,Math" />
@@ -42,8 +42,6 @@
 
 
 
-
-<script src="/js/lib/search.js"></script>
 
 
 
@@ -155,130 +153,57 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
+            <div id="archives">
     
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div id="timeline-wrap" ref="timeline">
+    <div class="categories-tags">
         
-        <div class="timeline" data-title="c++常用模板">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/6/21</div>
-                <a href="/2026/06/21/C-%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF/">
-                    <h3>C++常用模板</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/C/" style="color: #ff7d73">
-                                C++
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
         
-        <div class="timeline" data-title="【闲聊】穷人怎么玩摄影">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/6/25</div>
-                <a href="/2026/06/25/%E7%A9%B7%E4%BA%BA%E6%80%8E%E4%B9%88%E7%8E%A9%E6%91%84%E5%BD%B1/">
-                    <h3>【闲聊】穷人怎么玩摄影</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Photo/" style="color: #ffa2c4">
-                                Photo
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
         
-        <div class="timeline" data-title="【题解】高新区不知道几几年七下不知道18题还是26题题解">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/6/28</div>
-                <a href="/2026/06/28/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91%E9%AB%98%E6%96%B0%E5%8C%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E5%87%A0%E5%87%A0%E5%B9%B4%E4%B8%83%E4%B8%8B%E4%B8%8D%E7%9F%A5%E9%81%9318%E9%A2%98%E8%BF%98%E6%98%AF26%E9%A2%98%E9%A2%98%E8%A7%A3/">
-                    <h3>【题解】高新区不知道几几年七下不知道18题还是26题题解</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Math/" style="color: #00a596">
-                                Math
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+        <span>
+            <a href="/tags/C-Techno-%E7%94%9F%E6%B4%BB/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                C++, Techno, 生活
+            </a>
+        </span>
         
-        <div class="timeline" data-title="2026.7.1day1代码总结">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2026/7/1</div>
-                <a href="/2026/07/01/2026-7-1-Day1-%E4%BB%A3%E7%A0%81%E6%80%BB%E7%BB%93/">
-                    <h3>2026.7.1 Day1 代码总结</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/C-Techno-%E7%94%9F%E6%B4%BB/" style="color: #00a596">
-                                C++, Techno, 生活
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+        
+        
+        <span>
+            <a href="/tags/C/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                C++
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Math/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Math
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Photo/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Photo
+            </a>
+        </span>
+        
         
     </div>
+    
 </div>
 
             <footer id="footer">
