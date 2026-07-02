@@ -1,0 +1,1179 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>C++常用模板 | XXS-Blog</title>
+    <meta name="author" content="XXS" />
+    <meta name="description" content="你想要的，这里…有点难说" />
+    <meta name="keywords" content="C++,游记,生活,Techno,Photo,Math" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avat.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/load.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XXS-BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XXS-BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>C++常用模板</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/21
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/C/" style="color: #00bcd4">
+                    C++
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="C-常用模板"><a href="#C-常用模板" class="headerlink" title="C++常用模板"></a>C++常用模板</h1><h2 id="1-KMP"><a href="#1-KMP" class="headerlink" title="1.KMP"></a>1.KMP</h2><pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#define MAXN 1000010
+using namespace std;
+int kmp[MAXN];
+int la,lb,j; 
+char a[MAXN],b[MAXN];
+int main()
+&#123;
+    cin&gt;&gt;a+1;
+    cin&gt;&gt;b+1;
+    la=strlen(a+1);
+    lb=strlen(b+1);
+    for (int i=2;i&lt;=lb;i++)
+       &#123;     
+       while(j&amp;&amp;b[i]!=b[j+1])
+        j=kmp[j];    
+       if(b[j+1]==b[i])j++;    
+        kmp[i]=j;
+       &#125;
+    j=0;
+    for(int i=1;i&lt;=la;i++)
+       &#123;
+          while(j&gt;0&amp;&amp;b[j+1]!=a[i])
+           j=kmp[j];
+          if (b[j+1]==a[i]) 
+           j++;
+          if (j==lb) &#123;cout&lt;&lt;i-lb+1&lt;&lt;endl;j=kmp[j];&#125;
+       &#125;
+
+    for (int i=1;i&lt;=lb;i++)
+    cout&lt;&lt;kmp[i]&lt;&lt;&quot; &quot;;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="2-手写堆"><a href="#2-手写堆" class="headerlink" title="2.手写堆"></a>2.手写堆</h2><pre><code class="cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#define ll long long
+#define inf 1&lt;&lt;30
+#define il inline 
+#define in1(a) read(a)
+#define in2(a,b) in1(a),in1(b)
+#define in3(a,b,c) in2(a,b),in1(c)
+#define in4(a,b,c,d) in2(a,b),in2(c,d)
+il int max(int x,int y)&#123;return x&gt;y?x:y;&#125;
+il int min(int x,int y)&#123;return x&lt;y?x:y;&#125;
+il int abs(int x)&#123;return x&gt;0?x:-x;&#125;
+il void swap(int &amp;x,int &amp;y)&#123;int t=x;x=y;y=t;&#125;
+il void readl(ll &amp;x)&#123;
+    x=0;ll f=1;char c=getchar();
+    while(c&lt;&#39;0&#39;||c&gt;&#39;9&#39;)&#123;if(c==&#39;-&#39;)f=-f;c=getchar();&#125;
+    while(c&gt;=&#39;0&#39;&amp;&amp;c&lt;=&#39;9&#39;)&#123;x=x*10+c-&#39;0&#39;;c=getchar();&#125;
+    x*=f;
+&#125;
+il void read(int &amp;x)&#123;
+    x=0;int f=1;char c=getchar();
+    while(c&lt;&#39;0&#39;||c&gt;&#39;9&#39;)&#123;if(c==&#39;-&#39;)f=-f;c=getchar();&#125;
+    while(c&gt;=&#39;0&#39;&amp;&amp;c&lt;=&#39;9&#39;)&#123;x=x*10+c-&#39;0&#39;;c=getchar();&#125;
+    x*=f;
+&#125;
+using namespace std;
+/*===================Header Template=====================*/
+#define N 200010
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; q;
+priority_queue&lt;int&gt; q1;
+int n,m,a[N],b[N];
+int main()&#123;
+    in2(n,m);
+    for(int i=1;i&lt;=n;i++)in1(a[i]);
+    for(int i=1;i&lt;=m;i++)in1(b[i]);
+    int i=1;
+    for(int j=1;j&lt;=m;j++)&#123;
+        for(;i&lt;=b[j];i++)&#123;
+            q1.push(a[i]);
+            if(q1.size()==j)q.push(q1.top()),q1.pop();
+        &#125;
+        printf(&quot;%d\n&quot;,q.top());
+        q1.push(q.top());q.pop();
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="3-【作者手打】Floyd"><a href="#3-【作者手打】Floyd" class="headerlink" title="3.【作者手打】Floyd"></a>3.【作者手打】Floyd</h2><pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt;
+using namespace std;
+const int INF = 1e9;
+int main() &#123;
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    vector&lt;vector&lt;int&gt;&gt; dist(n + 1, vector&lt;int&gt;(n + 1, INF));
+    for (int i = 1; i &lt;= n; i++) &#123;
+        dist[i][i] = 0;
+    &#125;
+    for (int i = 0; i &lt; m; i++) &#123;
+        int u, v, w;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+        if (w &lt; dist[u][v]) &#123;
+            dist[u][v] = w;
+            dist[v][u] = w; 
+        &#125;
+    &#125;
+    for (int k = 1; k &lt;= n; k++) &#123;
+        for (int i = 1; i &lt;= n; i++) &#123;
+            for (int j = 1; j &lt;= n; j++) &#123;
+                if (dist[i][k] &lt; INF &amp;&amp; dist[k][j] &lt; INF) &#123;
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    for (int i = 1; i &lt;= n; i++) &#123;
+        for (int j = 1; j &lt;= n; j++) &#123;
+            cout &lt;&lt; dist[i][j] &lt;&lt; &quot; &quot;;
+        &#125;
+        cout &lt;&lt; endl;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="4-Manacher"><a href="#4-Manacher" class="headerlink" title="4.Manacher"></a>4.Manacher</h2><pre><code class="cpp">//@winlere
+#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int maxn=11000002;
+char data[maxn&lt;&lt;1];
+int p[maxn&lt;&lt;1],cnt,ans;
+inline void qr()&#123;
+      char c=getchar();
+      data[0]=&#39;~&#39;,data[cnt=1]=&#39;|&#39;;
+      while(c&lt;&#39;a&#39;||c&gt;&#39;z&#39;) c=getchar();
+      while(c&gt;=&#39;a&#39;&amp;&amp;c&lt;=&#39;z&#39;) data[++cnt]=c,data[++cnt]=&#39;|&#39;,c=getchar();
+&#125;
+int main()&#123;
+      qr();
+      for(int t=1,r=0,mid=0;t&lt;=cnt;++t)&#123;
+        if(t&lt;=r) p[t]=min(p[(mid&lt;&lt;1)-t],r-t+1);
+        while(data[t-p[t]]==data[t+p[t]]) ++p[t];
+        //暴力拓展左右两侧,当t-p[t]==0时，由于data[0]是&#39;~&#39;，自动停止。故不会下标溢出。
+        //假若我这里成功暴力扩展了，就意味着到时候r会单调递增，所以manacher是线性的。
+        if(p[t]+t&gt;r) r=p[t]+t-1,mid=t;
+        //更新mid和r,保持r是最右的才能保证我们提前确定的部分回文半径尽量多。
+        if(p[t]&gt;ans) ans=p[t];
+      &#125;
+      printf(&quot;%d\n&quot;,ans-1);
+      return 0;
+&#125;
+</code></pre>
+<h2 id="5-Runs【Lyndon分解】"><a href="#5-Runs【Lyndon分解】" class="headerlink" title="5.Runs【Lyndon分解】"></a>5.Runs【Lyndon分解】</h2><pre><code class="cpp">#pragma GCC target(&quot;sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,popcnt,tune=native&quot;)
+
+#include &lt;bits/stdc++.h&gt;
+
+typedef long long ll;
+typedef unsigned int ui;
+typedef unsigned long long ull;
+
+namespace standard_utilities &#123;
+  template &lt;typename Ty&gt;
+  inline Ty max(const Ty &amp;a, const Ty &amp;b) &#123;
+    return a &gt; b ? a : b;
+  &#125;
+
+  template &lt;typename Ty&gt;
+  inline Ty min(const Ty &amp;a, const Ty &amp;b) &#123;
+    return a &lt; b ? a : b;
+  &#125;
+
+  template &lt;typename Ty&gt;
+  inline void check_max(Ty &amp;a, const Ty &amp;b) &#123;
+    if (b &gt; a) a = b;
+  &#125;
+
+  template &lt;typename Ty&gt;
+  inline void check_min(Ty &amp;a, const Ty &amp;b) &#123;
+    if (b &lt; a) a = b;
+  &#125;
+
+  template &lt;typename Ty&gt;
+  inline void swap(Ty &amp;a, Ty &amp;b) &#123;
+    Ty c = a;
+    a = b, b = c;
+  &#125;
+&#125; // namespace standard_utilities
+
+using namespace standard_utilities;
+
+namespace Fast_IO &#123;
+  const int MaxBuff = 1 &lt;&lt; 15;
+  const int MaxOut = 1 &lt;&lt; 24;
+
+  char b[MaxBuff], *S = b, *T = b;
+  char buff[MaxOut], *iter = buff;
+
+  inline void flush() &#123;
+    fwrite(buff, 1, iter - buff, stdout), iter = buff;
+  &#125;
+
+  inline char get_char() &#123;
+    return (S == T &amp;&amp; (T = (S = b) + fread(b, 1, MaxBuff, stdin), S == T) ? 0 : *S++);
+  &#125;
+
+  inline void put_char(char c) &#123;
+    if (iter - buff &gt;= 1 &lt;&lt; 24 - 1) flush();
+    *iter++ = c;
+  &#125;
+  
+  struct Fast_IO_template &#123;
+    ~Fast_IO_template() &#123; flush(); &#125;
+
+    inline Fast_IO_template &amp;operator&gt;&gt;(char &amp;c) &#123;
+      c = get_char();
+      return *this;
+    &#125;
+
+    inline Fast_IO_template &amp;operator&lt;&lt;(char c) &#123;
+      put_char(c);
+      return *this;
+    &#125;
+
+    inline Fast_IO_template &amp;operator&gt;&gt;(char *s) &#123;
+      char *iter = s;
+      while (*iter = get_char(), *iter == &#39; &#39; || *iter == &#39;\n&#39; || *iter == &#39;\r&#39;);
+      while (*++iter = get_char(), *iter &amp;&amp; *iter != &#39; &#39; &amp;&amp; *iter != &#39;\n&#39; &amp;&amp; *iter != &#39;\r&#39;);
+      *iter = 0;
+      return *this;
+    &#125;
+
+    inline Fast_IO_template &amp;operator&lt;&lt;(int x) &#123;
+      static int stack[110];
+      int O = 0;
+      if (!x) put_char(&#39;0&#39;);
+      else &#123;
+        if (x &lt; 0) x = -x, put_char(&#39;-&#39;);
+        for (; x; x /= 10) stack[++O] = x % 10;
+        for (; O; put_char(&#39;0&#39; + stack[O--]));
+      &#125;
+      return *this;
+    &#125;
+  &#125;;
+&#125; // namespace Fast_IO
+
+Fast_IO::Fast_IO_template io;
+
+const int N = 1e6 + 10;
+
+struct my_tuple &#123;
+  int x, y, z;
+
+  inline bool operator &lt; (const my_tuple &amp;b) const &#123;
+    if (x != b.x)
+      return x &lt; b.x;
+    if (y != b.y)
+      return y &lt; b.y;
+    return z &lt; b.z;
+  &#125;
+
+  inline int operator[](const int b) &#123;
+    if (b == 0)
+      return x;
+    if (b == 1)
+      return y;
+    if (b == 2)
+      return z;
+  &#125;
+
+  inline bool operator == (const my_tuple &amp;b) &#123; 
+    return x == b.x &amp;&amp; y == b.y &amp;&amp; z == b.z; 
+  &#125;
+
+  inline bool operator != (const my_tuple &amp;b) &#123; 
+    return x != b.x || y != b.y || z != b.z; 
+  &#125;
+&#125;;
+
+struct my_pair &#123;
+  int x, y;
+
+  inline int &amp;operator[](const int b) &#123; return b == 0 ? x : y; &#125;
+&#125;;
+
+namespace SAIS &#123;
+  #define alloc(x, type, len) type *x = new type[len];
+
+  void induced_sort(int n, int m, int *s, bool *T, int *sa, int *cnt) &#123;
+    static int lptr[N], rptr[N];
+    int tmp;
+    lptr[0] = rptr[0] = 0;
+    for (int i = 1; i &lt;= m; ++i) lptr[i] = cnt[i - 1], rptr[i] = cnt[i] - 1;
+    for (int i = 0; i &lt;= n; ++i) sa[i] &gt; 0 &amp;&amp; !T[tmp = sa[i] - 1] ? sa[lptr[s[tmp]]++] = tmp : 0;
+    for (int i = n; i &gt;= 0; --i) sa[i] &gt; 0 &amp;&amp;  T[tmp = sa[i] - 1] ? sa[rptr[s[tmp]]--] = tmp : 0;
+  &#125;
+
+  bool compare(int *x, int *y, int n) &#123;
+    while (n--) if (*x++ != *y++) return 1;
+    return 0;
+  &#125;
+
+  void sais(int n, int m, int *s, int *sa) &#123;
+    --n;
+    alloc(T, bool, n + 10);
+    alloc(cnt, int, m + 10);
+    alloc(lms, int, n + 10);
+    alloc(tmp, int, n + 10);
+    for (int i = n; i &gt;= 0; --i) &#123;
+      T[i] = (i == n || s[i] &lt; s[i + 1] || s[i] == s[i + 1] &amp;&amp; T[i + 1]);
+      ++cnt[s[i]];
+    &#125;
+    tmp[0] = 0;
+    for (int i = 1; i &lt;= m; ++i) cnt[i] += cnt[i - 1], tmp[i] = cnt[i] - 1;
+    int LMS = 0;
+    for (int i = 1; i &lt;= n; ++i) T[i] &amp;&amp; !T[i - 1] ? lms[LMS++] = i : 0;
+    memset(sa, -1, (n + 1) &lt;&lt; 2);
+    for (int i = 0; i &lt; LMS; ++i) sa[tmp[s[lms[i]]]--] = lms[i];
+    induced_sort(n, m, s, T, sa, cnt);
+    alloc(len, int, n + 10);
+    lms[LMS] = n + 1;
+    for (int i = 0; i &lt; LMS; ++i) len[lms[i]] = lms[i + 1] - lms[i] + 1;
+    alloc(lab, int, n + 10);
+    int m0 = 0;
+    memset(lab, -1, (n + 1) &lt;&lt; 2);
+    for (int i = 1, p = -1, q = -1; i &lt;= n; ++i)
+      if ((q = sa[i]) &gt; 0 &amp;&amp; T[q] &amp;&amp; !T[q - 1]) &#123;
+        if (p == -1 || len[p] != len[q] || compare(s + p, s + q, len[p])) ++m0;
+        lab[q] = m0; p = q;
+      &#125;
+    lab[n] = 0;
+    alloc(s0, int, LMS + 10);
+    alloc(sa0, int, LMS + 10);
+    for (int i = 0, p = 0; i &lt;= n; ++i) lab[i] &gt;= 0 ? s0[p++] = lab[i] : 0;
+    if (m0 + 1 == LMS) for (int i = 0; i &lt; LMS; ++i) sa0[s0[i]] = i;
+    else sais(LMS, m0, s0, sa0);
+    tmp[0] = 0;
+    for (int i = 1; i &lt;= m; ++i) tmp[i] = cnt[i] - 1;
+    memset(sa, -1, (n + 1) &lt;&lt; 2);
+    for (int i = LMS - 1; i &gt;= 0; --i) sa[tmp[s[lms[sa0[i]]]]--] = lms[sa0[i]];
+    induced_sort(n, m, s, T, sa, cnt);
+  &#125;
+&#125; // namespace SAIS
+
+inline int log2n(int n) &#123; return 32 - __builtin_clz(n - 1); &#125;
+
+namespace RMQ_table &#123;
+  const int N = 2e6 + 20;
+  const int D_max = 21;
+  const int L = 20;
+  const int inf = 1 &lt;&lt; 30;
+
+  int stack[L + 1];
+
+  template &lt;typename T, int MAXN&gt;
+  class ST &#123;
+   private:
+    int f[N / L][D_max], M[N / L], a[N + L], n, q, D;
+
+    struct node &#123;
+      int state[L + 1], *a;
+
+      int Qmin(int x, int y) &#123; return a[x + __builtin_ctz(state[y] &gt;&gt; x)]; &#125;
+
+      void init(int *_a) &#123;
+        int top = 0;
+        a = _a;
+        for (int i = 1; i &lt;= L; ++i) &#123;
+          state[i] = state[i - 1];
+          while (top &amp;&amp; a[i] &lt;= a[stack[top]])
+            state[i] -= 1 &lt;&lt; stack[top], --top;
+          stack[++top] = i;
+          state[i] += 1 &lt;&lt; i;
+        &#125;
+      &#125;
+    &#125; c[N / L];
+
+   public:
+    void build(int _n, int *_a) &#123;
+      n = _n;
+      for (int i = 1; i &lt;= _n; ++i) a[i] = _a[i];
+      D = int(log2(n)) + 1;
+      int nn = n / L;
+      M[0] = -1;
+      for (int i = 1; i &lt;= nn; ++i) &#123;
+        f[i][0] = inf;
+        for (int j = 1; j &lt;= L; ++j)
+          f[i][0] = min(f[i][0], a[(i - 1) * L + j]);
+      &#125;
+      for (int i = 1; i &lt;= nn; ++i)
+        M[i] = !(i &amp; (i - 1)) ? M[i - 1] + 1 : M[i - 1];
+      for (int j = 1; j &lt;= D; ++j)
+        for (int i = 1; i &lt;= nn - (1 &lt;&lt; j) + 1; ++i)
+          f[i][j] = min(f[i][j - 1], f[i + (1 &lt;&lt; (j - 1))][j - 1]);
+      for (int i = 1; i &lt;= nn + 1; ++i)
+        c[i].init(a + (i - 1) * L);
+    &#125;
+
+    inline int Qmin_ST(int x, int y) &#123;
+      int z = M[y - x + 1];
+      return min(f[x][z], f[y - (1 &lt;&lt; z) + 1][z]);
+    &#125;
+
+    inline int rmq(int x, int y) &#123;
+      ++x, ++y;
+      int xx = (x - 1) / L + 1, yy = (y - 1) / L + 1, res;
+      if (xx + 1 &lt;= yy - 1)res = Qmin_ST(xx + 1, yy - 1); else res = inf;
+      if (xx == yy)res = min(res, c[xx].Qmin(x - (xx - 1) * L, y - (yy - 1) * L));
+      else res = min(res, c[xx].Qmin(x - (xx - 1) * L, L)), res = min(res, c[yy].Qmin(1, y - (yy - 1) * L));
+      return res;
+    &#125;
+  &#125;;
+&#125; // namespace RMQ_table
+
+using RMQ_table::ST;
+
+template &lt;int N, template &lt;typename, int&gt; class RMQ_T&gt;
+class SA &#123;
+ public:
+  RMQ_T&lt;int, N - 1&gt; rmq;
+  int n, sa[N], rk[N], height[N];
+
+  void build(int _n, char *str) &#123;
+    n = _n;
+    alloc(s, int, n + 10);
+    for (int i = 0; i &lt; n; ++i) s[i] = str[i];
+    SAIS::sais(n + 1, 26, s, sa);
+    for (int i = 1; i &lt;= n; ++i) rk[sa[i]] = i;
+    for (int k = 0, i = 0, j; i &lt; n; height[rk[i++]] = k)
+    for (k ? k-- : 0, j = sa[rk[i] - 1]; s[i + k] == s[j + k]; ++k);
+    rmq.build(n, height);
+  &#125;
+
+  int lcp(int i, int j) &#123;
+    //printf(&quot;lcp(%d,%d)\n&quot;, i, j);
+    if (i == j) return n - i;
+    if (j == n) return 0;
+    i = rk[i], j = rk[j];
+    if (i &gt; j) std::swap(i, j); 
+    return rmq.rmq(i, j - 1);
+  &#125;
+&#125;;
+
+template &lt;int N, template &lt;typename, int&gt; class RMQ_T&gt;
+class ISA &#123;
+ public:
+  RMQ_T&lt;int, N - 1&gt; rmq;
+  int n, sa[N], rk[N], height[N];
+
+  void build(int _n, char *str) &#123;
+    n = _n;
+    alloc(s, int, n + 10);
+    for (int i = 0; i &lt; n; ++i) s[i] = str[n - i - 1];
+    SAIS::sais(n + 1, 26, s, sa);
+    for (int i = 1; i &lt;= n; ++i) rk[sa[i]] = i;
+    for (int k = 0, i = 0, j; i &lt; n; height[rk[i++]] = k)
+    for (k ? k-- : 0, j = sa[rk[i] - 1]; s[i + k] == s[j + k]; ++k);
+    rmq.build(n, height);
+    //for (int i = 2; i &lt;= n + 1; ++i) printf(&quot;%d &quot;, height[i]); printf(&quot;\n&quot;);
+    //for (int i = 0; i &lt; n; ++i) printf(&quot;%d &quot;, rk[i]); printf(&quot;\n&quot;);
+  &#125;
+
+  int lcs(int i, int j) &#123;
+    //++i, ++j;
+    if (i &lt;= 0 || j &lt;= 0) return 0;
+    if (i == j) return i;
+    i = rk[n - i], j = rk[n - j];
+    if (i &gt; j) std::swap(i, j);
+    //printf(&quot;rmq(%d,%d)&quot;, i, j);
+    return rmq.rmq(i, j - 1);
+  &#125;
+&#125;;
+
+int n, nsv[N], nbv[N];
+char s[N];
+SA&lt;N, ST&gt; sa;
+ISA&lt;N, ST&gt; isa;
+std::vector&lt;my_tuple&gt; runs;
+
+int get_lcs(int i, int j) &#123;
+  int low = 0, high = min(i, j);
+  while (low &lt; high) &#123;
+    int middle = low + high + 1 &gt;&gt; 1;
+    if (sa.lcp(i - middle, j - middle) &gt;= middle)
+      low = middle;
+    else
+      high = middle - 1;
+  &#125;
+  //printf(&quot;lcs(%d,%d) : %d %d\n&quot;, i, j, isa.lcs(i, j), low);
+  return low;
+&#125;
+
+void add_run(int i, int j) &#123;
+  int length = j - i;
+  int lcs = isa.lcs(i, j);
+  if (lcs &lt; length) &#123;
+    int lcp = sa.lcp(i, j);
+    if (lcs + lcp &gt;= length) runs.push_back((my_tuple)&#123;i - lcs + 1, j + lcp, length&#125;);
+  &#125;
+&#125;
+
+std::vector&lt;int&gt; a[N], a2[N], a3[N];
+int b[N], c[N];
+
+void my_sort_and_unique() &#123;
+  int m = runs.size();
+  for (int i = 0; i &lt; m; ++i) a[runs[i].z].push_back(i);
+  for (int i = 1, tmp = 0; i &lt;= n; ++i)
+    for (int j = 0; j &lt; a[i].size(); ++j) b[tmp++] = a[i][j];
+  for (int i = 0; i &lt; m; ++i) a2[runs[b[i]].y].push_back(b[i]);
+  for (int i = 1, tmp = 0; i &lt;= n; ++i)
+    for (int j = 0; j &lt; a2[i].size(); ++j) b[tmp++] = a2[i][j];
+  for (int i = 0; i &lt; m; ++i) a3[runs[b[i]].x].push_back(b[i]);
+  for (int i = 1, tmp = 0; i &lt;= n; ++i)
+    for (int j = 0; j &lt; a3[i].size(); ++j) b[tmp++] = a3[i][j];
+  int tmp = 0; c[0] = b[0];
+  for (int i = 1; i &lt; m; ++i)
+    if (runs[b[i - 1]] != runs[b[i]]) c[++tmp] = b[i];
+  io &lt;&lt; tmp + 1 &lt;&lt; &#39;\n&#39;;
+  for (int i = 0; i &lt;= tmp; ++i)
+    io &lt;&lt; runs[c[i]].x &lt;&lt; &#39; &#39; &lt;&lt; runs[c[i]].y &lt;&lt; &#39; &#39; &lt;&lt; runs[c[i]].z &lt;&lt; &#39;\n&#39;;
+&#125;
+
+int main() &#123;
+  io &gt;&gt; s; n = strlen(s);
+  for (int i = 0; i &lt; n; ++i) s[i] = s[i] - &#39;a&#39; + 1;
+  sa.build(n, s);
+  isa.build(n, s);
+  for (int i = n; i--;) &#123;
+    for (int &amp;j = nsv[i] = i + 1; j &lt; n &amp;&amp; sa.rk[i] &lt; sa.rk[j];) j = nsv[j];
+    for (int &amp;j = nbv[i] = i + 1; j &lt; n &amp;&amp; sa.rk[i] &gt; sa.rk[j];) j = nbv[j];
+    add_run(i, nsv[i]);
+    if (nsv[i] != nbv[i]) add_run(i, nbv[i]);
+  &#125;
+  std::sort(runs.begin(), runs.end());
+  runs.erase(std::unique(runs.begin(), runs.end()), runs.end());
+  io &lt;&lt; (int)runs.size() &lt;&lt; &#39;\n&#39;;
+  for (auto a : runs) io &lt;&lt; a.x &lt;&lt; &#39; &#39; &lt;&lt; a.y &lt;&lt; &#39; &#39; &lt;&lt; a.z &lt;&lt; &#39;\n&#39;;
+  return 0;
+&#125;
+</code></pre>
+<h2 id="6-Pfaffian"><a href="#6-Pfaffian" class="headerlink" title="6.Pfaffian"></a>6.Pfaffian</h2><pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn=505,mod=1000000007;
+int n,ans,flg;
+int a[maxn][maxn];
+int ksm(int a,int b) &#123;
+    int res=1;
+    while(b) &#123;
+        if(b&amp;1)
+            res=1ll*res*a%mod;
+        a=1ll*a*a%mod,b&gt;&gt;=1;
+    &#125;
+    return res;
+&#125;
+int main() &#123;
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1; i&lt;=n; i++)
+        for(int j=i+1; j&lt;=n; j++)
+            scanf(&quot;%d&quot;,&amp;a[i][j]);
+    for(int i=1; i&lt;=n; i+=2) &#123;
+        int p=i+1;
+        for(int j=i+2; j&lt;=n; j++)
+            if(a[i][j]) &#123;
+                p=j;
+                break;
+            &#125;
+        if(p!=i+1) &#123;
+            flg^=1;
+            for(int j=1; j&lt;=i; j++)
+                swap(a[j][i+1],a[j][p]);
+            for(int j=i+2; j&lt;p; j++)
+                swap(a[i+1][j],a[j][p]),a[i+1][j]=mod-a[i+1][j],a[j][p]=mod-a[j][p];
+            a[i+1][p]=mod-a[i+1][p];
+            for(int j=p+1; j&lt;=n; j++)
+                swap(a[i+1][j],a[p][j]);
+        &#125;
+        int iv=ksm(a[i][i+1],mod-2);
+        for(int j=i+2; j&lt;=n; j++)
+            if(a[i][j]) &#123;
+                int coef=1ll*(mod-a[i][j])*iv%mod;
+                for(int k=1; k&lt;=i; k++)
+                    a[k][j]=(a[k][j]+1ll*coef*a[k][i+1])%mod;
+                for(int k=i+2; k&lt;j; k++)
+                    a[k][j]=(a[k][j]+1ll*(mod-coef)*a[i+1][k])%mod;
+                for(int k=j+1; k&lt;=n; k++)
+                    a[j][k]=(a[j][k]+1ll*coef*a[i+1][k])%mod;
+            &#125;
+    &#125;
+    ans=1;
+    for(int i=1; i&lt;=n; i+=2)
+        ans=1ll*ans*a[i][i+1]%mod;
+    printf(&quot;%d\n&quot;,flg==0? ans%mod:(mod-ans)%mod);
+    return 0;
+&#125;
+</code></pre>
+<h2 id="7-负环"><a href="#7-负环" class="headerlink" title="7.负环"></a>7.负环</h2><pre><code class="cpp">#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#define inf 0x3f3f3f3f
+using namespace std;
+const int MAXN=2010;
+const int MAXM=3010;
+int n,m;
+
+int en=-1,eh[MAXN];
+struct edge
+&#123;
+    int u,v,w,next;
+    edge(int U=0,int V=0,int W=0,int N=0):u(U),v(V),w(W),next(N)&#123;&#125;
+&#125;;edge e[MAXM&lt;&lt;1];
+inline void add_edge(int u,int v,int w)
+&#123;
+    e[++en]=edge(u,v,w,eh[u]);eh[u]=en;
+&#125;
+void input()
+&#123;
+    scanf(&quot;%d %d&quot;,&amp;n,&amp;m);
+    en=-1;
+    memset(eh,-1,sizeof(eh));
+    int u,v,w;
+    for(int i=1;i&lt;=m;++i)
+    &#123;
+        scanf(&quot;%d %d %d&quot;,&amp;u,&amp;v,&amp;w);
+        add_edge(u,v,w);
+        if(w&gt;=0)add_edge(v,u,w);
+    &#125;
+&#125;
+
+int dis[MAXN],cnt[MAXN];
+bool vis[MAXN];
+queue&lt;int&gt; q;
+void spfa()
+&#123;
+    fill(dis+1,dis+n+1,inf);
+    memset(cnt,0,sizeof(cnt));
+    memset(vis,0,sizeof(vis));
+    
+    while(!q.empty())q.pop();
+    dis[1]=0;vis[1]=1;q.push(1);
+    
+    int u,v,w;
+    while(!q.empty())
+    &#123;
+        u=q.front();vis[u]=0;q.pop();
+        for(int i=eh[u];i!=-1;i=e[i].next)
+        &#123;
+            v=e[i].v;w=e[i].w;
+            if(dis[u]+w&lt;dis[v])
+            &#123;
+                dis[v]=dis[u]+w;
+                if(!vis[v])
+                &#123;
+                    if(++cnt[v]&gt;=n)//注意就是这个位置的判断。一定要保证在判vis之后，即判入队次数；而不是在判vis之前，即判松弛次数！！！
+                    &#123;
+                        printf(&quot;YES\n&quot;);return;
+                    &#125;
+                    vis[v]=1;q.push(v);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    printf(&quot;NO\n&quot;);
+&#125;
+
+int main()
+&#123;
+//	freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    for(int i=1;i&lt;=t;++i)
+    &#123;
+        input();
+        spfa();
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="8-手打队列"><a href="#8-手打队列" class="headerlink" title="8.手打队列"></a>8.手打队列</h2><pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;string.h&gt;
+#include&lt;string&gt;
+#include&lt;unordered_map&gt;
+#include&lt;algorithm&gt;
+#include&lt;stdio.h&gt;
+#include&lt;queue&gt;
+using namespace std;
+int n, m, i, j, k;
+queue&lt;int&gt; q;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for (i = 1; i &lt;= n; i++)
+    &#123;
+        int op, x;
+        cin &gt;&gt; op;
+        if (op == 1) cin &gt;&gt; x, q.push(x);//加入
+        else if (op == 2)
+        &#123;
+            if (q.empty()) cout &lt;&lt; &quot;ERR_CANNOT_POP\n&quot;;//要判断是否为空，否则RE
+            else q.pop();//如果不为空，弹出
+        &#125;
+        else if (op == 3)
+        &#123;
+            if (q.empty()) cout &lt;&lt; &quot;ERR_CANNOT_QUERY\n&quot;;//同上
+            else cout &lt;&lt; q.front() &lt;&lt; endl;//输出第一个
+        &#125;
+        else cout &lt;&lt; q.size() &lt;&lt; endl;//输出队列大小
+    &#125;
+    return 0;//结束
+&#125;
+</code></pre>
+<h2 id="9-Pollard-Rho"><a href="#9-Pollard-Rho" class="headerlink" title="9.Pollard-Rho"></a>9.Pollard-Rho</h2><pre><code class="cpp">#include&lt;fstream&gt;
+#include&lt;iostream&gt;
+#include&lt;ctime&gt;
+#include&lt;cstdlib&gt;
+#include&lt;map&gt;
+#define auto unsigned long long
+#define abs
+using namespace std;
+const int tl=12;
+const auto p[]=&#123;2,3,5,7,11,13,17,19,23,29,31,37&#125;;
+auto product(auto x,auto y,auto mod)
+&#123;
+    return (__int128)x*y%mod;
+&#125;
+auto gcd(auto a,auto b)
+&#123;
+    return (b==0)?a:gcd(b,a%b);
+&#125;/*
+auto gcd(auto a,auto b)//所谓的快速gcd 实测一点都不快
+&#123;
+    if(!a||!b)return a|b;//这个特判是有用的
+    int k=__builtin_ctzll(a|b);//作用是取某个数最后一位0的个数
+    b&gt;&gt;=__builtin_ctzll(b);
+    while(a)
+    &#123;
+        a&gt;&gt;=__builtin_ctzll(a);
+        if(a&lt;b)swap(a,b);
+        a-=b;
+    &#125;
+    return (b&lt;&lt;k);
+&#125;*/
+auto power(auto x,auto a,auto mod)//快速幂的另一种写法
+&#123;
+    auto res;
+    for(res=1;a!=0;a&gt;&gt;=1)
+    &#123;
+        if((a&amp;1)!=0)res=product(res,x,mod);
+        x=product(x,x,mod);
+    &#125;
+    return res;
+&#125;
+bool Miller_Rabin(auto x)
+&#123;
+    if(x==1)return 0;//特判
+    for(int i=0;i&lt;tl;i++)
+    &#123;
+        if(x==p[i])return 1;//显然
+        bool ok=0;
+        auto v=x-1;
+        while((v&amp;1)==0)v&gt;&gt;=1;
+        auto y=power(p[i],v,x);
+        if(y==1)ok=1;
+        else
+        &#123;
+            while(v&lt;x-1)
+            &#123;
+                if(y==x-1)
+                &#123;
+                    ok=1;
+                    break;
+                &#125;
+                v&lt;&lt;=1;
+                y=product(y,y,x);
+            &#125;
+        &#125;
+        if(!ok)return 0;
+    &#125;
+    return 1;
+&#125;
+auto big_rand()//[0,2^45)
+&#123;
+    auto x=rand();
+    for(int i=0;i&lt;3;++i)
+    x=(x&lt;&lt;15|rand());
+    return rand();
+&#125;
+auto seed;
+auto f(auto a,auto mod)
+&#123;
+    return (product(a,a,mod)+seed)%mod;
+&#125;
+auto floyd(auto n) //绕环
+&#123;
+    seed=big_rand()%n;
+//	cout&lt;&lt;seed;
+    auto fast,slow,res;
+    fast=slow=big_rand()%n;
+    fast=f(fast,n);//注意一开始不要先跳两步
+    while(fast!=slow)
+    &#123;
+        res=gcd(fast-slow+n,n);
+    //	cout&lt;&lt;fast&lt;&lt;&#39; &#39;&lt;&lt;slow&lt;&lt;&#39; &#39;&lt;&lt;(fast-slow+n)%n&lt;&lt;endl;
+        if(res!=1)return res;
+        fast=f(f(fast,n),n);
+        slow=f(slow,n);
+    &#125;
+//	for(;;);
+    return 1;
+&#125;
+void Pollard_rho(auto n,map&lt;auto,int&gt;&amp;fat)
+&#123;
+    if(n==1)return;
+//	cout&lt;&lt;n&lt;&lt;endl;
+    if(Miller_Rabin(n))
+    &#123;
+        fat[n]++;
+        return;
+    &#125;
+    auto k=1;
+    while(k==1)k=floyd(n);
+//	cout&lt;&lt;n&lt;&lt;&#39;!&#39;&lt;&lt;k&lt;&lt;endl;
+    Pollard_rho(k,fat);
+    Pollard_rho(n/k,fat);
+&#125;
+int main()
+&#123;
+    srand(time(NULL));
+    auto n;
+    map&lt;auto,int&gt;fat;
+    cin&gt;&gt;n;
+    Pollard_rho(n,fat);
+    for(map&lt;auto,int&gt;::iterator it=fat.begin();it!=fat.end();it++)
+    cout&lt;&lt;it-&gt;first&lt;&lt;&#39; &#39;&lt;&lt;it-&gt;second&lt;&lt;endl;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="10-2-SAT"><a href="#10-2-SAT" class="headerlink" title="10.2-SAT"></a>10.2-SAT</h2><pre><code class="cpp">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::min;
+
+/*------------------------------IO------------------------------*/
+
+namespace IO_number&#123;
+    int read()&#123;
+        int x =0; char c =getchar(); bool f =0;
+        while(c &lt; &#39;0&#39; || c &gt; &#39;9&#39;) (c == &#39;-&#39;) ? f =1, c =getchar() : c =getchar();
+        while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) x =(x&lt;&lt;1)+(x&lt;&lt;3)+(48^c), c =getchar();
+        return (f) ? -x : x;
+    &#125;
+    
+    void write(const int &amp;x)&#123;
+        if(x/10)
+            write(x/10);
+        putchar(&#39;0&#39;+x%10);
+    &#125;
+&#125;
+using namespace IO_number;
+
+/*------------------------------Graph------------------------------*/
+
+const int MAXN =1e6+20;
+
+int first[MAXN&lt;&lt;1], tote;
+struct edge&#123;
+    int to, nxt;
+&#125;e[MAXN&lt;&lt;1];
+
+inline void addedge(const int &amp;u, const int &amp;v)&#123;
+    ++tote, e[tote].to =v, e[tote].nxt =first[u], first[u] =tote;
+&#125;
+
+/*------------------------------Tarjan------------------------------*/
+
+int scc_id[MAXN&lt;&lt;1], Scc_id;
+
+int dfn[MAXN&lt;&lt;1], low[MAXN&lt;&lt;1], Dfn;
+int stk[MAXN&lt;&lt;1], stk_top;
+bool instk[MAXN&lt;&lt;1];
+
+void tarjan(const int &amp;u)&#123;
+    low[u] =dfn[u] =++Dfn;
+    stk[stk_top++] =u;
+    instk[u] =1;
+    for(int l =first[u]; l; l =e[l].nxt)&#123;
+        if(!dfn[e[l].to])&#123;
+            tarjan(e[l].to);
+            low[u] =min(low[u], low[e[l].to]);
+        &#125;
+        else if(instk[e[l].to])
+            low[u] =min(low[u], dfn[e[l].to]);
+    &#125;
+    if(low[u] == dfn[u])&#123;
+        ++Scc_id;
+        while(stk[stk_top] != u)&#123;
+            scc_id[stk[stk_top-1]] =Scc_id;
+            instk[stk[stk_top-1]] =0;
+            --stk_top;
+        &#125;
+    &#125;
+&#125;
+
+/*------------------------------Main------------------------------*/
+
+int main()&#123;
+    int n =read(), m =read();
+    for(int t =0; t &lt; m; ++t)&#123;
+        int i =read(), a =read(), j =read(), b =read();
+        /* [1, n] -&gt; false, [n+1, 2n] -&gt; true */
+        // x_i, x_j 均不满足不能同时成立 //
+        addedge(i+(a^1)*n, j+b*n);
+        addedge(j+(b^1)*n, i+a*n);
+    &#125;
+    
+    for(int i =1; i &lt;= 2*n; ++i)&#123;
+        if(!dfn[i])
+            tarjan(i);
+        if(i &lt;= n &amp;&amp; scc_id[i] == scc_id[i+n])
+            return puts(&quot;IMPOSSIBLE&quot;) &amp;&amp; 0;
+    &#125;
+    puts(&quot;POSSIBLE&quot;);
+    for(int i =1; i &lt;= n; ++i)
+        write((scc_id[i+n] &lt; scc_id[i])), putchar(&#39; &#39;);
+&#125;
+</code></pre>
+<p>就先到这吧</p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 XXS-Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;XXS
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="chentucheng/chentucheng.github.io"
+    data-repo-id="R_kgDOTArErQ"
+    data-category="Blog Comments"
+    data-category-id="DIC_kwDOTArErc4DACec"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>

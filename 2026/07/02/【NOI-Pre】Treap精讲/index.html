@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>【NOI-Pre】Treap精讲 | XXS-Blog</title>
+    <meta name="author" content="XXS" />
+    <meta name="description" content="你想要的，这里…有点难说" />
+    <meta name="keywords" content="C++,游记,生活,Techno,Photo,Math" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avat.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/load.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XXS-BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XXS-BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>【NOI-Pre】Treap精讲</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/7/2
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/C/" style="color: #00bcd4">
+                    C++
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Techno/" style="color: #00a596">
+                    Techno
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h6 id="By-XXS"><a href="#By-XXS" class="headerlink" title="By XXS"></a>By XXS</h6><h2 id="1-Treap是什么？"><a href="#1-Treap是什么？" class="headerlink" title="1.Treap是什么？"></a>1.Treap是什么？</h2><p><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/treap/"><img src="/./images/OI-Wiki.png" alt="oiwiki"></a><br>顾名思义，Tree+Heap（树+堆），整棵树的点权遵循<strong>左小右大</strong>的原则，整棵树的键值遵循堆的上小下大（小根堆）或上大下小（大根堆）原则</p>
+<h2 id="2-食用方法"><a href="#2-食用方法" class="headerlink" title="2.食用方法"></a>2.食用方法</h2><h3 id="2-1-旋转"><a href="#2-1-旋转" class="headerlink" title="2.1 旋转"></a>2.1 旋转</h3><h4 id="2-1-1-右旋"><a href="#2-1-1-右旋" class="headerlink" title="2.1.1 右旋"></a>2.1.1 右旋</h4><ol>
+<li><p>将位于<strong>左子树</strong>的一点变成根</p>
+</li>
+<li><p>将刚刚换下来的根和<strong>右子树</strong>比对Key值，并根据上文的堆原则进行部分旋转</p>
+</li>
+</ol>
+<h4 id="2-1-2-左旋"><a href="#2-1-2-左旋" class="headerlink" title="2.1.2 左旋"></a>2.1.2 左旋</h4><p>同理右旋</p>
+<p>容易证明以上操作一定不存在逻辑错误（即不符合上文原则）</p>
+<h3 id="2-2-插入"><a href="#2-2-插入" class="headerlink" title="2.2 插入"></a>2.2 插入</h3><ol>
+<li><p>插入一点时，先为它Random一个Key值</p>
+</li>
+<li><p>根据堆原则，旋转该点至合适位置</p>
+</li>
+</ol>
+<h3 id="2-3-删除"><a href="#2-3-删除" class="headerlink" title="2.3 删除"></a>2.3 删除</h3><ol>
+<li><p>将该点不断旋转至一叶子节点</p>
+</li>
+<li><p>Delete</p>
+</li>
+</ol>
+<h3 id="2-4-排序"><a href="#2-4-排序" class="headerlink" title="2.4 排序"></a>2.4 排序</h3><p>中序遍历该树，得排序结果</p>
+<h3 id="2-5-前驱-后继"><a href="#2-5-前驱-后继" class="headerlink" title="2.5 前驱&amp;后继"></a>2.5 前驱&amp;后继</h3><ol>
+<li><p>找到该节点</p>
+</li>
+<li><p>找该节点父亲，若该节点再右，且求后继，即为右儿子，若该节点在左，且求前驱，即为左儿子</p>
+</li>
+</ol>
+<h2 id="3-可替换该数据结构的STL"><a href="#3-可替换该数据结构的STL" class="headerlink" title="3.可替换该数据结构的STL"></a>3.可替换该数据结构的STL</h2><p>显然，手打过于困难</p>
+<p>但是C++为我们提供一种STL模板，名为muliset，对应使用方法如下：</p>
+<pre><code class="cpp">#include&lt;set&gt;
+muliset&lt;int&gt;m;
+       //↑填数据类型，也可以再重载&lt;后填入struct
+m.insert(x); //2.2
+m.erase(x); //2.3
+m.upper_bound(x); //2.5前驱 /*Notice:
+m.lower_bound(x); //2.5后继      注意迭代器使用 */
+</code></pre>
+<h2 id="4-后记"><a href="#4-后记" class="headerlink" title="4.后记"></a>4.后记</h2><p>今天来♯，又被保安拷打了</p>
+<p>宇哥还没来，把自己再厕所里塞了50分钟，计时发现♯的入们大课间使用时间≈40min</p>
+<p>8:20AM貌似来了一个领导上厕所，吓亖我了</p>
+<h1 id="结束！"><a href="#结束！" class="headerlink" title="结束！"></a>结束！</h1>
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 XXS-Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;XXS
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="chentucheng/chentucheng.github.io"
+    data-repo-id="R_kgDOTArErQ"
+    data-category="Blog Comments"
+    data-category-id="DIC_kwDOTArErc4DACec"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>
