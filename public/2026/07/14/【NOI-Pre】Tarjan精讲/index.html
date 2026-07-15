@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>【NOI-Pre】Tarjan精讲 | XXS-Blog</title>
+    <meta name="author" content="XXS" />
+    <meta name="description" content="你想要的，这里…有点难说" />
+    <meta name="keywords" content="C++,游记,生活,Techno,Photo,Math" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avat.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/load.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>XXS-BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于作者</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/chentucheng">
+            <i class="fa-brands fa-github fa-fw"></i>
+            <span>&ensp;Github</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;XXS-BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于作者</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/chentucheng">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-brands fa-github fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Github</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>【NOI-Pre】Tarjan精讲</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/7/14
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E8%92%9C%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                蒜法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/C/" style="color: #ff7d73">
+                    C++
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Techno/" style="color: #00bcd4">
+                    Techno
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h6 id="By-XXS"><a href="#By-XXS" class="headerlink" title="By XXS"></a>By XXS</h6><h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>Tarjan，一大堆算法的总称，由于这些算法都是由Tarjan发明的，而他又似乎不太会命名，所以导致求强连通分量、求割点、桥、求最近公共祖先（LCA）这些问题中全都有这么个Tarjan</p>
+<p>本期主要讲求强连通分量</p>
+<h2 id="2-正题"><a href="#2-正题" class="headerlink" title="2.正题"></a>2.正题</h2><h3 id="1-强连通分量是什么？"><a href="#1-强连通分量是什么？" class="headerlink" title="1.强连通分量是什么？"></a>1.强连通分量是什么？</h3><p>明确以下几点</p>
+<ol>
+<li>仅在有向图中存在强连通分量这一概念</li>
+<li>一个点自身一定是强连通的</li>
+<li>强连通指的是再任意有向图中，任意两个节点可达，即对于任意$u, v \in S$，都有$U \leadsto V$且$V \leadsto U$</li>
+</ol>
+<p>所以强连通分量，即为一个有向图中满足强连通的子图</p>
+<h3 id="2-怎么求？"><a href="#2-怎么求？" class="headerlink" title="2.怎么求？"></a>2.怎么求？</h3><p>显然，用Tarjan</p>
+<p>那我问你，怎么用？</p>
+<p>过程如下：</p>
+<ol>
+<li>定义dfn[u]（点$u$第一次被访问的时间戳），low[u]（点$u$沿DFS树边向下走若干步，再至多用一条返祖边，能到达的仍在栈中的最小dfn。），栈S（已经发现，但还没有确定归属SCC的点）</li>
+<li>访问$u$：令dfn[u]&#x3D;low[u]&#x3D;++timer（累加时间戳）</li>
+<li>枚举访问$u$的出边$u \to v$</li>
+<li>$v$未访问，递归访问$v$，回溯后用low[v]更新low[u]</li>
+<li>$v$已访问，用dfn[v]更新low[u]</li>
+<li>若dfn[u]&#x3D;low[u]，则$u$是SCC的根，不断弹栈直到$u$</li>
+</ol>
+<h3 id="3-怎么打"><a href="#3-怎么打" class="headerlink" title="3.怎么打"></a>3.怎么打</h3><p>模板（求强连通分量数量）：</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define N 1000010
+int n,m,dfn[N],low[N],scc[N],timer,cnt;
+vector&lt;int&gt; g[N];
+stack&lt;int&gt; s;
+bool is[N];
+void tarjan(int u)&#123;
+    dfn[u]=low[u]=++timer;
+    is[u]=true;
+    s.push(u);
+    for(int v:g[u])&#123;
+        if(!dfn[v])&#123;
+            tarjan(v);
+            low[u]=min(low[u],low[u]);
+        &#125;else if(is[v]) low[u]=min(low[u],dfn[v]);
+    &#125;
+    if(dfn[u]==low[u])&#123;
+        cnt++;
+        int nw=-1;
+        while(nw!=u)&#123;
+            nw=s.top();
+            s.pop();
+            scc[nw]=cnt;
+            is[nw]=false;
+        &#125;
+    &#125;
+&#125;
+int main()&#123;
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int u,v;
+        cin&gt;&gt;u&gt;&gt;v;
+        g[u].push_back(v);
+    &#125;
+    for(int i=1;i&lt;=n;i++) if(!dfn[i]) tarjan(i);
+    cout&lt;&lt;cnt;
+    return 0;
+&#125;
+</code></pre>
+<h1 id="完结撒花！"><a href="#完结撒花！" class="headerlink" title="完结撒花！"></a>完结撒花！</h1>
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 XXS-Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;XXS
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="chentucheng/chentucheng.github.io"
+    data-repo-id="R_kgDOTArErQ"
+    data-category="Blog Comments"
+    data-category-id="DIC_kwDOTArErc4DACec"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>
