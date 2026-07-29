@@ -1,4 +1,7 @@
 ---
 title: Game
-date: 2026-07-28 22:29:06
+layout: page
 ---
+这里有一堆Game
+
+[xyc](/xyc)
