@@ -4,4 +4,4 @@ layout: page
 ---
 这里有一堆Game
 
-[xyc](/xyc)
+[xyc模拟器](/Game/xyc)
