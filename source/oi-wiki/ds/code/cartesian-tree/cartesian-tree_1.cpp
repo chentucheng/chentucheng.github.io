@@ -1,9 +1,10 @@
 #include <algorithm>
+#include <cstdio>
 #include <cstring>
 #include <iostream>
 using namespace std;
-using ll = long long;
-constexpr int N = 100000 + 10, INF = 0x3f3f3f3f;
+typedef long long ll;
+const int N = 100000 + 10, INF = 0x3f3f3f3f;
 
 struct node {
   int idx, val, par, ch[2];
@@ -39,18 +40,17 @@ int dfs(int x) {  // 一次dfs更新答案就可以了
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   int n, hi;
-  while (cin >> n, n) {
+  while (scanf("%d", &n), n) {
     tree[0].init(0, 0, 0);
     for (int i = 1; i <= n; i++) {
-      cin >> hi;
+      scanf("%d", &hi);
       tree[i].init(i, hi, 0);
     }
     root = cartesian_build(n);
     ans = 0;
     dfs(root);
-    cout << ans << '\n';
+    printf("%lld\n", ans);
   }
   return 0;
 }

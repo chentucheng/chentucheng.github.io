@@ -1,9 +1,8 @@
 #include <cmath>
-#include <iomanip>
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
-constexpr double eps = 1e-7;
+const double eps = 0.0000001;
 int N;
 double l, r, A[20], mid, lmid, rmid;
 
@@ -14,9 +13,8 @@ double f(double x) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> N >> l >> r;
-  for (int i = N; i >= 0; i--) cin >> A[i];
+  scanf("%d%lf%lf", &N, &l, &r);
+  for (int i = N; i >= 0; i--) scanf("%lf", &A[i]);
   while (r - l > eps) {
     mid = (l + r) / 2;
     lmid = mid - eps;
@@ -26,6 +24,6 @@ int main() {
     else
       l = mid;
   }
-  cout << fixed << setprecision(6) << l;
+  printf("%6lf", l);
   return 0;
 }

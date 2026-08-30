@@ -1,16 +1,15 @@
-#include <algorithm>
-#include <iostream>
-using namespace std;
+#include <bits/stdc++.h>
 
-constexpr int MAXN = 50010;
+using namespace std;
+#define maxn 50010
 
 struct node {
   int to, next;
-} edge[MAXN << 1];
+} edge[maxn << 1];
 
-int fa[MAXN][30], head[MAXN << 1];
-int power[MAXN];
-int depth[MAXN], lg[MAXN];
+int fa[maxn][30], head[maxn << 1];
+int power[maxn];
+int depth[maxn], lg[maxn];
 int n, k, ans = 0, tot = 0;
 
 void add(int x, int y) {  // 加边
@@ -50,21 +49,20 @@ void get_ans(int u, int father) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> k;
+  scanf("%d %d", &n, &k);
   int x, y;
   for (int i = 1; i <= n; i++) {
     lg[i] = lg[i - 1] + (1 << lg[i - 1] == i);
   }
   for (int i = 1; i <= n - 1; i++) {  // 建图
-    cin >> x >> y;
+    scanf("%d %d", &x, &y);
     add(x, y);
     add(y, x);
   }
   dfs(1, 0);
   int s, t;
   for (int i = 1; i <= k; i++) {
-    cin >> s >> t;
+    scanf("%d %d", &s, &t);
     int ancestor = lca(s, t);
     // 树上差分
     power[s]++;
@@ -73,6 +71,6 @@ int main() {
     power[fa[ancestor][0]]--;
   }
   get_ans(1, 0);
-  cout << ans << '\n';
+  printf("%d\n", ans);
   return 0;
 }

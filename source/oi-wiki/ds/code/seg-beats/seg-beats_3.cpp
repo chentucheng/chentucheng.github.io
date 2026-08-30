@@ -1,10 +1,26 @@
-#include <algorithm>
-#include <climits>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+typedef long long ll;
 
-constexpr int N = 1e5 + 7;
+char nc() {
+  static char buf[1000000], *p = buf, *q = buf;
+  return p == q && (q = (p = buf) + fread(buf, 1, 1000000, stdin), p == q)
+             ? EOF
+             : *p++;
+}
+
+ll rd() {  // LLONG_MIN LMAX=9,223,372,036,854,775,807
+  ll s = 0, w = 1;
+  char ch = nc();
+  while (ch < '0' || ch > '9') {
+    if (ch == '-') w = -1;
+    ch = nc();
+  }
+  while (ch >= '0' && ch <= '9') s = s * 10 + ch - '0', ch = nc();
+  return s * w;
+}
+
+const int N = 1e5 + 7;
 
 struct Tree {
   int mx, _mx;  // 区间最大值 区间历史最大值
@@ -89,26 +105,22 @@ int qmaxh(int u = 1, int l = 1, int r = n) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
-  for (int i = 1; i <= n; ++i) cin >> a[i];
+  n = rd();
+  for (int i = 1; i <= n; ++i) a[i] = rd();
   build();
-  int m, z;
-  cin >> m;
+  int m = rd(), z;
   for (int i = 1; i <= m; ++i) {
-    char op;
-    cin >> op;
-    while (op == ' ' || op == '\r' || op == '\n') cin >> op;
-    cin >> L >> R;
-    int x;
+    char op = nc();
+    while (op == ' ' || op == '\r' || op == '\n') op = nc();
+    L = rd(), R = rd();
     if (op == 'Q')
-      cout << qmax() << '\n';
+      printf("%d\n", qmax());
     else if (op == 'A')
-      cout << qmaxh() << '\n';
+      printf("%d\n", qmaxh());
     else if (op == 'P')
-      cin >> x, add(x);
+      add(rd());
     else
-      cin >> x, tset(x);
+      tset(rd());
   }
   return 0;
 }

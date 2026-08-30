@@ -1,12 +1,10 @@
-#include <iomanip>
-#include <iostream>
+#include <cstdio>
 using namespace std;
 int n, s;
 double dp[1010][1010];
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> s;
+  scanf("%d %d", &n, &s);
   dp[n][s] = 0;
   for (int i = n; i >= 0; i--) {
     for (int j = s; j >= 0; j--) {
@@ -16,6 +14,6 @@ int main() {
                  (n * s - i * j);  // 概率转移
     }
   }
-  cout << fixed << setprecision(4) << dp[0][0] << '\n';
+  printf("%.4lf\n", dp[0][0]);
   return 0;
 }

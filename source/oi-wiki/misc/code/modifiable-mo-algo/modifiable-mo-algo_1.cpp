@@ -1,14 +1,18 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+
+#define int long long
+#define endl '\n'
+
 using namespace std;
 
-long long qsize;
+int qsize;
 
 struct query {
-  long long id, t, l, r;
+  int id, t, l, r;
 
-  bool operator<(query b) const {
+  inline bool operator<(query b) {
     if (l / qsize != b.l / qsize) {
       return l / qsize > b.l / qsize;
     } else if (r / qsize != b.r / qsize) {
@@ -20,30 +24,30 @@ struct query {
 } q[150009];
 
 struct operation {
-  long long p, x;
+  int p, x;
 } r[150009];
 
 char op;
-long long n, m, x, y, cur, qcnt, rcnt, mp[1500009], a[150009], ans[150009];
+int n, m, x, y, cur, qcnt, rcnt, mp[1500009], a[150009], ans[150009];
 
-void add(long long x) {
+inline void add(int x) {
   if (!mp[x]) {
     cur += 1;
   }
   mp[x] += 1;
 }
 
-void del(long long x) {
+inline void del(int x) {
   mp[x] -= 1;
   if (!mp[x]) {
     cur -= 1;
   }
 }
 
-void process() {
+inline void process() {
   sort(q + 1, q + qcnt + 1);
-  long long L = 1, R = 0, last = 0;
-  for (long long i = 1; i <= qcnt; i++) {
+  int L = 1, R = 0, last = 0;
+  for (int i = 1; i <= qcnt; i++) {
     while (R < q[i].r) {
       add(a[++R]);
     }
@@ -77,23 +81,24 @@ void process() {
 }
 
 signed main() {
-  cin.tie(nullptr);
+  cin.tie(0);
+  cout.tie(0);
   ios::sync_with_stdio(false);
   cin >> n >> m;
   qsize = pow(n, 2.0 / 3.0);
-  for (long long i = 1; i <= n; i++) {
+  for (int i = 1; i <= n; i++) {
     cin >> a[i];
   }
-  for (long long i = 1; i <= m; i++) {
+  for (int i = 1; i <= m; i++) {
     cin >> op >> x >> y;
     if (op == 'Q') {
-      ++qcnt, q[qcnt] = {qcnt, rcnt, x, y};
+      q[++qcnt] = {qcnt, rcnt, x, y};
     } else if (op == 'R') {
       r[++rcnt] = {x, y};
     }
   }
   process();
-  for (long long i = 1; i <= qcnt; i++) {
-    cout << ans[i] << '\n';
+  for (int i = 1; i <= qcnt; i++) {
+    cout << ans[i] << endl;
   }
 }

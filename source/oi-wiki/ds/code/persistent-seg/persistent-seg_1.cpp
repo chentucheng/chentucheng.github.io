@@ -1,17 +1,16 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct SegmentTree {
   int lc, rc, val, rnk;
 };
 
-constexpr int MAXN = 100000 + 5;
-constexpr int MAXM = 200000 + 5;
+const int MAXN = 100000 + 5;
+const int MAXM = 200000 + 5;
 
 SegmentTree
     t[MAXN * 2 +
-      MAXM * 40];  // 每次操作1会修改两次，一次修改父节点，一次修改父节点的秩
+      MAXM * 40];  //每次操作1会修改两次，一次修改父节点，一次修改父节点的秩
 int rt[MAXM];
 int n, m, tot;
 
@@ -28,7 +27,7 @@ int build(int l, int r) {
   return p;
 }
 
-int getRnk(int p, int l, int r, int pos) {  // 查询秩
+int getRnk(int p, int l, int r, int pos) {  //查询秩
   if (l == r) {
     return t[p].rnk;
   }
@@ -40,7 +39,7 @@ int getRnk(int p, int l, int r, int pos) {  // 查询秩
   }
 }
 
-int modifyRnk(int now, int l, int r, int pos, int val) {  // 修改秩（高度）
+int modifyRnk(int now, int l, int r, int pos, int val) {  //修改秩（高度）
   int p = ++tot;
   t[p] = t[now];
   if (l == r) {
@@ -56,7 +55,7 @@ int modifyRnk(int now, int l, int r, int pos, int val) {  // 修改秩（高度�
   return p;
 }
 
-int query(int p, int l, int r, int pos) {  // 查询父节点（序列中的值）
+int query(int p, int l, int r, int pos) {  //查询父节点（序列中的值）
   if (l == r) {
     return t[p].val;
   }
@@ -68,7 +67,7 @@ int query(int p, int l, int r, int pos) {  // 查询父节点（序列中的值�
   }
 }
 
-int findRoot(int p, int pos) {  // 查询根节点
+int findRoot(int p, int pos) {  //查询根节点
   int f = query(p, 1, n, pos);
   if (pos == f) {
     return pos;
@@ -76,7 +75,7 @@ int findRoot(int p, int pos) {  // 查询根节点
   return findRoot(p, f);
 }
 
-int modify(int now, int l, int r, int pos, int fa) {  // 修改父节点（合并）
+int modify(int now, int l, int r, int pos, int fa) {  //修改父节点（合并）
   int p = ++tot;
   t[p] = t[now];
   if (l == r) {
@@ -93,19 +92,18 @@ int modify(int now, int l, int r, int pos, int fa) {  // 修改父节点（合�
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  scanf("%d%d", &n, &m);
   rt[0] = build(1, n);
   for (int i = 1; i <= m; i++) {
     int op, a, b;
 
-    cin >> op;
+    scanf("%d", &op);
     if (op == 1) {
-      cin >> a >> b;
+      scanf("%d%d", &a, &b);
       int fa = findRoot(rt[i - 1], a), fb = findRoot(rt[i - 1], b);
       if (fa != fb) {
         if (getRnk(rt[i - 1], 1, n, fa) >
-            getRnk(rt[i - 1], 1, n, fb)) {  // 按秩合并
+            getRnk(rt[i - 1], 1, n, fb)) {  //按秩合并
           swap(fa, fb);
         }
         int tmp = modify(rt[i - 1], 1, n, fa, fb);
@@ -114,12 +112,16 @@ int main() {
         rt[i] = rt[i - 1];
       }
     } else if (op == 2) {
-      cin >> a;
+      scanf("%d", &a);
       rt[i] = rt[a];
     } else {
-      cin >> a >> b;
+      scanf("%d%d", &a, &b);
       rt[i] = rt[i - 1];
-      cout << (findRoot(rt[i], a) == findRoot(rt[i], b)) << '\n';
+      if (findRoot(rt[i], a) == findRoot(rt[i], b)) {
+        printf("1\n");
+      } else {
+        printf("0\n");
+      }
     }
   }
 

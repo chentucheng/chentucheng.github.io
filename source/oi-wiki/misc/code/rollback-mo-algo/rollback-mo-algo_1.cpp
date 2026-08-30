@@ -1,9 +1,7 @@
-#include <algorithm>
-#include <cmath>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
-constexpr int N = 1e5 + 5;
+typedef long long ll;
+const int N = 1e5 + 5;
 int n, q;
 int x[N], t[N], m;
 
@@ -42,10 +40,9 @@ void Add(int v, ll& Ans) {
 void Del(int v) { --cnt[v]; }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> q;
-  for (int i = 1; i <= n; i++) cin >> x[i], t[++m] = x[i];
-  for (int i = 1; i <= q; i++) cin >> Q[i].l >> Q[i].r, Q[i].id = i;
+  scanf("%d %d", &n, &q);
+  for (int i = 1; i <= n; i++) scanf("%d", &x[i]), t[++m] = x[i];
+  for (int i = 1; i <= q; i++) scanf("%d %d", &Q[i].l, &Q[i].r), Q[i].id = i;
 
   build();
 
@@ -91,6 +88,6 @@ int main() {
     // 回滚
     while (__l < l) Del(x[__l]), ++__l;
   }
-  for (int i = 1; i <= q; i++) cout << ans[i] << '\n';
+  for (int i = 1; i <= q; i++) printf("%lld\n", ans[i]);
   return 0;
 }

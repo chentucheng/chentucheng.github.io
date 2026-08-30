@@ -1,26 +1,23 @@
+#include <cstdio>
 #include <cstring>
-#include <iostream>
-constexpr int N = 100010;
+const int N = 100010;
 int n, a[N], l[N], r[N];
 long long sum[N];
 long long ans;
 int ansl, ansr;
-bool fir = true;
-using std::cin;
-using std::cout;
+bool fir = 1;
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  while (cin >> n) {
+  while (scanf("%d", &n) != EOF) {
     memset(a, -1, sizeof(a));
     if (!fir)
-      cout << '\n';
+      printf("\n");
     else
-      fir = false;
+      fir = 0;
     ans = 0;
     ansl = ansr = 1;
     for (int i = 1; i <= n; i++) {
-      cin >> a[i];
+      scanf("%d", &a[i]);
       sum[i] = sum[i - 1] + a[i];
       l[i] = r[i] = i;
     }
@@ -33,7 +30,7 @@ int main() {
       if (ans < x || (ans == x && ansr - ansl > r[i] - l[i]))
         ans = x, ansl = l[i], ansr = r[i];
     }
-    cout << ans << '\n' << ansl << ' ' << ansr << '\n';
+    printf("%lld\n%d %d\n", ans, ansl, ansr);
   }
   return 0;
 }

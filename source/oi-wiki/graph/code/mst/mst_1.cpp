@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 
 struct Edge {
   int x, y, z;
@@ -12,30 +12,26 @@ int cmp(const Edge& a, const Edge& b) { return a.z < b.z; }
 
 int find(int x) { return f[x] == x ? x : f[x] = find(f[x]); }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   int t;
-  cin >> t;
+  scanf("%d", &t);
   while (t--) {
     int n, m;
-    cin >> n >> m;
+    scanf("%d%d", &n, &m);
     for (int i = 1; i <= n; i++) f[i] = i;
-    for (int i = 1; i <= m; i++) cin >> a[i].x >> a[i].y >> a[i].z;
+    for (int i = 1; i <= m; i++) scanf("%d%d%d", &a[i].x, &a[i].y, &a[i].z);
     std::sort(a + 1, a + m + 1, cmp);  // 先排序
     int num = 0, ans = 0, tail = 0, sum1 = 0, sum2 = 0;
-    bool flag = true;
+    bool flag = 1;
     for (int i = 1; i <= m + 1; i++) {  // 再并查集加边
       if (i > tail) {
         if (sum1 != sum2) {
-          flag = false;
+          flag = 0;
           break;
         }
         sum1 = 0;
         for (int j = i; j <= m + 1; j++) {
-          if (j > m || a[j].z != a[i].z) {
+          if (a[j].z != a[i].z) {
             tail = j - 1;
             break;
           }
@@ -54,9 +50,9 @@ int main() {
       }
     }
     if (flag)
-      cout << ans << '\n';
+      printf("%d\n", ans);
     else
-      cout << "Not Unique!\n";
+      printf("Not Unique!\n");
   }
   return 0;
 }

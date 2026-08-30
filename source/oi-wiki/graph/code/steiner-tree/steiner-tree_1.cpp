@@ -1,23 +1,20 @@
-#include <cstring>
-#include <iostream>
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-constexpr int MAXN = 510;
-constexpr int INF = 0x3f3f3f3f;
-using P = pair<int, int>;
+const int maxn = 510;
+const int INF = 0x3f3f3f3f;
+typedef pair<int, int> P;
 int n, m, k;
 
 struct edge {
   int to, next, w;
-} e[MAXN << 1];
+} e[maxn << 1];
 
-int head[MAXN << 1], tree[MAXN << 1], tot;
-int dp[MAXN][5000], vis[MAXN];
-int key[MAXN];
-priority_queue<P, vector<P>, greater<P>> q;
+int head[maxn << 1], tree[maxn << 1], tot;
+int dp[maxn][5000], vis[maxn];
+int key[maxn];
+priority_queue<P, vector<P>, greater<P> > q;
 
 void add(int u, int v, int w) {
   e[++tot] = edge{v, head[u], w};
@@ -41,19 +38,18 @@ void dijkstra(int s) {  // 求解最短路
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   memset(dp, INF, sizeof(dp));
-  cin >> n >> m >> k;
+  scanf("%d %d %d", &n, &m, &k);
   int u, v, w;
   for (int i = 1; i <= m; i++) {
-    cin >> u >> v >> w;
+    scanf("%d %d %d", &u, &v, &w);
     add(u, v, w);
     tree[tot] = v;
     add(v, u, w);
     tree[tot] = u;
   }
   for (int i = 1; i <= k; i++) {
-    cin >> key[i];
+    scanf("%d", &key[i]);
     dp[key[i]][1 << (i - 1)] = 0;
   }
   for (int s = 1; s < (1 << k); s++) {
@@ -65,6 +61,6 @@ int main() {
     }
     dijkstra(s);
   }
-  cout << dp[key[1]][(1 << k) - 1] << '\n';
+  printf("%d\n", dp[key[1]][(1 << k) - 1]);
   return 0;
 }

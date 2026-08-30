@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <cmath>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-constexpr int N = 50005;
+const int N = 50005;
 int n, m, maxn;
 int c[N];
 long long sum;
@@ -31,11 +31,10 @@ void del(int i) {
 long long gcd(long long a, long long b) { return b ? gcd(b, a % b) : a; }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  scanf("%d%d", &n, &m);
   maxn = sqrt(n);
-  for (int i = 1; i <= n; i++) cin >> c[i];
-  for (int i = 0; i < m; i++) cin >> a[i].l >> a[i].r, a[i].id = i;
+  for (int i = 1; i <= n; i++) scanf("%d", &c[i]);
+  for (int i = 0; i < m; i++) scanf("%d%d", &a[i].l, &a[i].r), a[i].id = i;
   sort(a, a + m);
   for (int i = 0, l = 1, r = 0; i < m; i++) {  // 具体实现
     if (a[i].l == a[i].r) {
@@ -55,7 +54,7 @@ int main() {
       ans1[i] /= g, ans2[i] /= g;
     } else
       ans2[i] = 1;
-    cout << ans1[i] << '/' << ans2[i] << '\n';
+    printf("%lld/%lld\n", ans1[i], ans2[i]);
   }
   return 0;
 }

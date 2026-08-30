@@ -1,13 +1,11 @@
-#include <iostream>
-#include <stack>
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::cin;
 using std::cout;
 using std::stack;
 using std::vector;
 
-constexpr int MAX = 65536;
+const int MAX = 65536;
 int n, x, tot;
 int d[MAX], w[MAX], siz[MAX], p[MAX], f[MAX][17];
 vector<int> e[MAX], g[MAX], h[MAX];

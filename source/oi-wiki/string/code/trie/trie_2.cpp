@@ -1,8 +1,8 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
-constexpr int N = 100010;
+const int N = 100010;
 
 int head[N], nxt[N << 1], to[N << 1], weight[N << 1], cnt;
 int n, dis[N], ch[N << 5][2], tot = 1, ans;
@@ -47,18 +47,18 @@ void dfs(int u, int fa) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
+  scanf("%d", &n);
 
   for (int i = 1; i < n; ++i) {
     int u, v, w;
-    cin >> u >> v >> w;
+    scanf("%d%d%d", &u, &v, &w);
     add(u, v, w);  // 双向边
     add(v, u, w);
   }
 
   dfs(1, 0);
 
-  cout << ans;
+  printf("%d", ans);
+
   return 0;
 }

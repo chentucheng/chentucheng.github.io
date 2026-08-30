@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 constexpr int N(1e6), M(2 * N), inf(1e7), RNG{26};
 
@@ -52,20 +51,20 @@ struct SuffixTree {
     int ys{0};
     for (int i{0}; i <= RNG; ++i)
       if (ch[u][i]) {
-        auto res = search(ch[u][i], dep);
-        ans = max(ans, res.first);
-        ys += res.second;
+        auto [__, _]{search(ch[u][i], dep)};
+        ans = max(ans, __);
+        ys += _;
       }
     if (ys > 1) ans = max(ans, 1LL * dep * ys);
     return {ans, ys};
   }
 } T;
 
-string s;
+char s[N + 5];
 
 int main() {
-  cin >> s;
-  for (int i = 0; i < s.size(); ++i) T.extend(s[i] - 'a' + 1);
+  scanf("%s", s + 1);
+  for (int i{1}; s[i]; ++i) T.extend(s[i] - 'a' + 1);
   T.extend(0);
   cout << T.search(1).first << endl;
   return 0;

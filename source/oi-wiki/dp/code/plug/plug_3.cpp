@@ -1,18 +1,17 @@
-#include <cstring>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 template <class T>
 bool checkMax(T &a, const T b) {
-  return a < b ? a = b, true : false;
+  return a < b ? a = b, 1 : 0;
 }
 
-constexpr int N = 8, M = 8;
-constexpr int offset = 3, mask = (1 << offset) - 1;
+const int N = 8, M = 8;
+const int offset = 3, mask = (1 << offset) - 1;
 int A[N + 1][M + 1];
 int n, m;
 int ans, d;
-constexpr int MaxSZ = 16796, Prime = 9973;
+const int MaxSZ = 16796, Prime = 9973;
 
 struct hashTable {
   int head[Prime], next[MaxSZ], sz;

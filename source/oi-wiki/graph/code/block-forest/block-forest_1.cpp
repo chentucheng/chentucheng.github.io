@@ -1,8 +1,8 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 #include <vector>
 
-constexpr int MN = 100005;
+const int MN = 100005;
 
 int N, M, cnt;
 std::vector<int> G[MN], T[MN * 2];
@@ -52,17 +52,13 @@ void DFS(int u, int fz) {  // dfs求值
   Ans += 2ll * wgh[u] * siz[u] * (num - siz[u]);
 }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> N >> M;
+  scanf("%d%d", &N, &M);
   for (int u = 1; u <= N; ++u) wgh[u] = -1;
   cnt = N;
   for (int i = 1; i <= M; ++i) {
     int u, v;
-    cin >> u >> v;
+    scanf("%d%d", &u, &v);
     G[u].push_back(v);
     G[v].push_back(u);
   }
@@ -72,6 +68,6 @@ int main() {
       Tarjan(u), --tp;
       DFS(u, 0);
     }
-  cout << Ans << '\n';
+  printf("%lld\n", Ans);
   return 0;
 }

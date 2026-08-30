@@ -1,8 +1,8 @@
 #include <cctype>
+#include <cstdio>
 #include <cstring>
-#include <iostream>
 using namespace std;
-constexpr int sqn = 1e3;
+static const int sqn = 1e3;
 
 struct node {  // 定义块状链表
   node* nxt;
@@ -18,7 +18,7 @@ char inits[(int)1e6 + 5];
 int llen, q;
 
 void readch(char& ch) {  // 读入字符
-  do cin >> ch;
+  do ch = getchar();
   while (!isalpha(ch));
 }
 
@@ -38,7 +38,8 @@ void insert(char c, int pos) {  // 元素插入，借助链表来理解
     p->pb(c), check(p);
     return;
   }
-  for (tot = head->size; p != NULL && tot < pos; p = p->nxt, tot += p->size);
+  for (tot = head->size; p != NULL && tot < pos; p = p->nxt, tot += p->size)
+    ;
   tot -= p->size, cnt = pos - tot - 1;
   for (int i = p->size - 1; i >= cnt; i--) p->d[i + 1] = p->d[i];
   p->d[cnt] = c, p->size++;
@@ -49,15 +50,14 @@ char query(int pos) {  // 查询
   node* p;
   int tot;
   for (p = head, tot = head->size; p != NULL && tot < pos;
-       p = p->nxt, tot += p->size);
+       p = p->nxt, tot += p->size)
+    ;
   tot -= p->size;
   return p->d[pos - tot - 1];
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> inits >> q;
-  llen = strlen(inits);
+  scanf("%s %d", inits, &q), llen = strlen(inits);
   node* p = new node;
   head = p;
   for (int i = 0; i < llen; i++) {
@@ -69,9 +69,9 @@ int main() {
   while (q--) {
     readch(a);
     if (a == 'Q')
-      cin >> k, cout << query(k) << '\n';
+      scanf("%d", &k), printf("%c\n", query(k));
     else
-      readch(a), cin >> k, insert(a, k);
+      readch(a), scanf("%d", &k), insert(a, k);
   }
   return 0;
 }

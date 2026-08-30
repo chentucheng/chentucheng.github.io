@@ -1,16 +1,9 @@
-eps = 1e-6
 n, l, r = map(float, input().split())
-a = tuple(map(float, input().split()))[::-1]
-
-
-def f(x):
-    return sum(x**i * j for i, j in enumerate(a))
-
-
-while r - l > eps:
+a = [i * float(j) for i, j in enumerate(input().split()[::-1])][1:]
+while r - l > 1e-6:
     mid = (l + r) / 2
-    if f(mid - eps) > f(mid + eps):
+    if sum(mid ** i * j for i, j in enumerate(a)) < 0:
         r = mid
     else:
         l = mid
-print(round(l, 6))
+print(l)

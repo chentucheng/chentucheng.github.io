@@ -1,8 +1,23 @@
 #include <algorithm>
 #include <cctype>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-constexpr int N = 1e6 + 6;
+const int N = 1e6 + 6;
+
+char nc() {
+  static char buf[1000000], *p = buf, *q = buf;
+  return p == q && (q = (p = buf) + fread(buf, 1, 1000000, stdin), p == q)
+             ? EOF
+             : *p++;
+}
+
+int rd() {
+  int res = 0;
+  char c = nc();
+  while (!isdigit(c)) c = nc();
+  while (isdigit(c)) res = res * 10 + c - '0', c = nc();
+  return res;
+}
 
 int t, n, m;
 int a[N];
@@ -80,24 +95,23 @@ long long query_sum(int L, int R, int u = 1, int l = 1, int r = n) {  // 数值
 }
 
 void go() {  // 根据题意
-  cin >> n >> m;
-  for (int i = 1; i <= n; i++) cin >> a[i];
+  n = rd(), m = rd();
+  for (int i = 1; i <= n; i++) a[i] = rd();
   build();
   for (int i = 1; i <= m; i++) {
     int op, x, y, z;
-    cin >> op >> x >> y;
+    op = rd(), x = rd(), y = rd();
     if (op == 0)
-      cin >> z, modify_min(x, y, z);
+      z = rd(), modify_min(x, y, z);
     else if (op == 1)
-      cout << query_max(x, y) << '\n';
+      printf("%d\n", query_max(x, y));
     else
-      cout << query_sum(x, y) << '\n';
+      printf("%lld\n", query_sum(x, y));
   }
 }
 
 signed main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> t;
+  t = rd();
   while (t--) go();
   return 0;
 }

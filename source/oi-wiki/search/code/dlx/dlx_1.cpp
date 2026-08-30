@@ -1,12 +1,17 @@
-#include <cctype>
-#include <cstring>
-#include <iostream>
-constexpr int N = 500 + 10;
-int n, m, ans;
-int stk[N];
+#include <bits/stdc++.h>
+const int N = 500 + 10;
+int n, m, idx, ans;
+int first[N], siz[N], stk[N];
+
+int read() {  // 快读
+  int x = 0, f = 0, ch;
+  while (!isdigit(ch = getchar())) f |= ch == '-';
+  while (isdigit(ch)) x = (x << 1) + (x << 3) + (ch ^ 48), ch = getchar();
+  return f ? -x : x;
+}
 
 struct DLX {
-  static constexpr int MAXSIZE = 1e5 + 10;
+  static const int MAXSIZE = 1e5 + 10;
   int n, m, tot, first[MAXSIZE + 10], siz[MAXSIZE + 10];
   int L[MAXSIZE + 10], R[MAXSIZE + 10], U[MAXSIZE + 10], D[MAXSIZE + 10];
   int col[MAXSIZE + 10], row[MAXSIZE + 10];
@@ -51,7 +56,7 @@ struct DLX {
   bool dance(int dep) {  // dance
     if (!R[0]) {
       ans = dep;
-      return true;
+      return 1;
     }
     int i, j, c = R[0];
     for (i = R[0]; i != 0; i = R[i])
@@ -60,31 +65,26 @@ struct DLX {
     for (i = D[c]; i != c; i = D[i]) {
       stk[dep] = row[i];
       for (j = R[i]; j != i; j = R[j]) remove(col[j]);
-      if (dance(dep + 1)) return true;
+      if (dance(dep + 1)) return 1;
       for (j = L[i]; j != i; j = L[j]) recover(col[j]);
     }
     recover(c);
-    return false;
+    return 0;
   }
 } solver;
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  n = read(), m = read();
   solver.build(n, m);
   for (int i = 1; i <= n; ++i)
     for (int j = 1; j <= m; ++j) {
-      int x;
-      cin >> x;
+      int x = read();
       if (x) solver.insert(i, j);
     }
   solver.dance(1);
   if (ans)
-    for (int i = 1; i < ans; ++i) cout << stk[i] << ' ';
+    for (int i = 1; i < ans; ++i) printf("%d ", stk[i]);
   else
-    cout << "No Solution!\n";
+    puts("No Solution!");
   return 0;
 }

@@ -1,9 +1,8 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-constexpr int MAX_VAL_RANGE = 280010;
+const int MAX_VAL_RANGE = 280010;
 
 int n, m, log2Values[MAX_VAL_RANGE + 1];
 
@@ -15,7 +14,7 @@ struct Edge {
 int cnt, head[140010];
 
 void addedge(int u, int v, int val = 0) {
-  e[++cnt] = Edge{v, head[u], val};
+  e[++cnt] = (Edge){v, head[u], val};
   head[u] = cnt;
 }
 
@@ -120,7 +119,7 @@ int main() {
   for (int i = 1; i <= m; i++) {
     int u, v, val;
     cin >> u >> v >> val;
-    GR::e[i] = GR::Edge{u, v, val};
+    GR::e[i] = (GR::Edge){u, v, val};
   }
   GR::kruskal();
   TR::LCA::init();

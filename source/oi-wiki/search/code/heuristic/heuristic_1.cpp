@@ -1,7 +1,7 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-constexpr int N = 105;
+const int N = 105;
 int n, m, ans;
 
 struct Node {
@@ -30,14 +30,13 @@ void work(int t, int p, int v) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> m >> n;
+  scanf("%d %d", &m, &n);
   for (int i = 1; i <= n; i++) {
-    cin >> node[i].a >> node[i].b;
+    scanf("%d %d", &node[i].a, &node[i].b);
     node[i].f = 1.0 * node[i].b / node[i].a;  // f为性价比
   }
   sort(node + 1, node + n + 1);  // 根据性价比排序
   work(1, m, 0);
-  cout << ans << '\n';
+  printf("%d\n", ans);
   return 0;
 }

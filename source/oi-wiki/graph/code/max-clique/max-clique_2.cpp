@@ -1,9 +1,9 @@
+#include <cstdio>
 #include <cstring>
-#include <iostream>
 using namespace std;
-constexpr int MAXN = 130;
-bool mp[MAXN][MAXN];
-int some[MAXN][MAXN], none[MAXN][MAXN], all[MAXN][MAXN];
+const int maxn = 130;
+bool mp[maxn][maxn];
+int some[maxn][maxn], none[maxn][maxn], all[maxn][maxn];
 int n, m, ans;
 
 void dfs(int d, int an, int sn, int nn) {
@@ -33,19 +33,18 @@ int work() {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  while (cin >> n >> m) {
+  while (~scanf("%d %d", &n, &m)) {
     memset(mp, 0, sizeof mp);
     for (int i = 1; i <= m; ++i) {
       int u, v;
-      cin >> u >> v;
-      mp[u][v] = mp[v][u] = true;
+      scanf("%d %d", &u, &v);
+      mp[u][v] = mp[v][u] = 1;
     }
     int tmp = work();
     if (tmp > 1000)
-      cout << "Too many maximal sets of friends.\n";
+      puts("Too many maximal sets of friends.");
     else
-      cout << tmp << '\n';
+      printf("%d\n", tmp);
   }
   return 0;
 }

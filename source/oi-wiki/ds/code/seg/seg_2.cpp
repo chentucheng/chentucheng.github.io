@@ -1,5 +1,14 @@
-#include <iostream>
-using ll = long long;
+#include <cstdio>
+#define ll long long
+
+ll read() {
+  ll w = 1, q = 0;
+  char ch = ' ';
+  while (ch != '-' && (ch < '0' || ch > '9')) ch = getchar();
+  if (ch == '-') w = -1, ch = getchar();
+  while (ch >= '0' && ch <= '9') q = (ll)q * 10 + ch - '0', ch = getchar();
+  return (ll)w * q;
+}
 
 int n, m;
 ll mod;
@@ -94,27 +103,30 @@ ll getans(int l, int r, int s, int t,
   return tot % mod;
 }
 
-using std::cin;
-using std::cout;
-
 int main() {  // 读入
-  cin.tie(nullptr)->sync_with_stdio(false);
   int i, j, x, y, bh;
   ll z;
-  cin >> n >> m >> mod;
-  for (i = 1; i <= n; i++) cin >> a[i];
+  n = read();
+  m = read();
+  mod = read();
+  for (i = 1; i <= n; i++) a[i] = read();
   build(1, n, 1);  // 建树
   for (i = 1; i <= m; i++) {
-    cin >> bh;
+    bh = read();
     if (bh == 1) {
-      cin >> x >> y >> z;
+      x = read();
+      y = read();
+      z = read();
       chen(x, y, 1, n, 1, z);
     } else if (bh == 2) {
-      cin >> x >> y >> z;
+      x = read();
+      y = read();
+      z = read();
       add(x, y, 1, n, 1, z);
     } else if (bh == 3) {
-      cin >> x >> y;
-      cout << getans(x, y, 1, n, 1) << '\n';
+      x = read();
+      y = read();
+      printf("%lld\n", getans(x, y, 1, n, 1));
     }
   }
   return 0;

@@ -1,9 +1,9 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 #include <stack>
 #include <vector>
 using namespace std;
-using ll = long long;
+typedef long long ll;
 int n;
 int m;
 int ask;
@@ -194,15 +194,14 @@ void solve(int l, int r, int dep) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m >> ask;
+  scanf("%d%d%d", &n, &m, &ask);
   s.ih();
   s1.ih();
   for (int i = 1; i <= m; i++) {
-    cin >> e[i].u >> e[i].v >> e[i].val;
+    scanf("%d%d%lld", &e[i].u, &e[i].v, &e[i].val);
   }
   for (int i = 1; i <= ask; i++) {
-    cin >> q[i].num >> q[i].val;
+    scanf("%d%lld", &q[i].num, &q[i].val);
   }
   for (int i = 1; i <= ask; i++) {  // 初始动态边
     book[q[i].num] = true;
@@ -211,16 +210,16 @@ int main() {
     p.v = e[q[i].num].v;
     vq.push_back(p);
   }
-  for (int i = 1; i <= m; i++) {  // 初始静态
+  for (int i = 1; i <= m; i++) {
     if (book[i]) continue;
     ve[1].push_back(e[i]);
-  }
+  }  // 初始静态
   for (int i = 1; i <= ask; i++) {
     book[q[i].num] = false;
   }
   solve(0, ask, 1);
   for (int i = 1; i <= ask; i++) {
-    cout << q[i].ans << '\n';
+    printf("%lld\n", q[i].ans);
   }
   return 0;
 }

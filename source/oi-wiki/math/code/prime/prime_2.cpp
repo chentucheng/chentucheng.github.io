@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 
 int p[16] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53};
@@ -7,9 +8,9 @@ unsigned long long ans,
               // ans的因子数。
 
 // depth: 当前在枚举第几个素数
-// temp: 当前因子数量为 num 的时候的数值
+// temp: 当前因子数量为 num的时候的数值
 // num: 当前因子数
-// up：上一个素数的幂，限制当前因子幂次上界
+// up：上一个素数的幂，这次应该小于等于这个幂次嘛
 void dfs(int depth, unsigned long long temp, unsigned long long num, int up) {
   if (depth >= 16 || temp > n) return;
   if (num > ans_num) {  // 更新答案
@@ -26,15 +27,11 @@ void dfs(int depth, unsigned long long temp, unsigned long long num, int up) {
   return;
 }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  while (cin >> n) {
+  while (scanf("%llu", &n) != EOF) {
     ans_num = 0;
     dfs(0, 1, 1, 60);
-    cout << ans << '\n';
+    printf("%llu\n", ans);
   }
   return 0;
 }

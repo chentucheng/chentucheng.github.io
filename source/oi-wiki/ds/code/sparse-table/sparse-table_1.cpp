@@ -1,32 +1,42 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int N = 100000 + 5;
-constexpr int logN = 16;  // ⌊ log_2 N ⌋
-int f[logN + 1][N], Logn[N];
+const int logn = 21;
+const int maxn = 2000001;
+int f[maxn][logn + 1], Logn[maxn + 1];
 
-// 初始化对数值
-void pre() {
+int read() {  // 快读
+  char c = getchar();
+  int x = 0, f = 1;
+  while (c < '0' || c > '9') {
+    if (c == '-') f = -1;
+    c = getchar();
+  }
+  while (c >= '0' && c <= '9') {
+    x = x * 10 + c - '0';
+    c = getchar();
+  }
+  return x * f;
+}
+
+void pre() {  // 准备工作，初始化
+  Logn[1] = 0;
   Logn[2] = 1;
-  for (int i = 3; i < N; i++) {
+  for (int i = 3; i < maxn; i++) {
     Logn[i] = Logn[i / 2] + 1;
   }
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
+  int n = read(), m = read();
+  for (int i = 1; i <= n; i++) f[i][0] = read();
   pre();
-  int n, m;
-  cin >> n >> m;
-  for (int i = 1; i <= n; i++) cin >> f[0][i];
-  for (int j = 1; j <= logN; j++)
+  for (int j = 1; j <= logn; j++)
     for (int i = 1; i + (1 << j) - 1 <= n; i++)
-      f[j][i] = max(f[j - 1][i], f[j - 1][i + (1 << (j - 1))]);  // ST表具体实现
+      f[i][j] = max(f[i][j - 1], f[i + (1 << (j - 1))][j - 1]);  // ST表具体实现
   for (int i = 1; i <= m; i++) {
-    int x, y;
-    cin >> x >> y;
+    int x = read(), y = read();
     int s = Logn[y - x + 1];
-    cout << max(f[s][x], f[s][y - (1 << s) + 1]) << '\n';
+    printf("%d\n", max(f[x][s], f[y - (1 << s) + 1][s]));
   }
   return 0;
 }

@@ -1,12 +1,13 @@
 #include <cctype>
-#include <iostream>
+#include <chrono>
+#include <cstdio>
 #include <random>
 #include <set>
 #include <vector>
 
-using ull = unsigned long long;
+typedef unsigned long long ull;
 
-const ull mask = std::mt19937_64(time(nullptr))();
+const ull mask = std::chrono::steady_clock::now().time_since_epoch().count();
 
 ull shift(ull x) {
   x ^= mask;
@@ -17,7 +18,7 @@ ull shift(ull x) {
   return x;
 }
 
-constexpr int N = 1e6 + 10;
+const int N = 1e6 + 10;
 
 int n;
 ull hash[N];
@@ -36,18 +37,14 @@ void getHash(int x, int p) {
   trees.insert(hash[x]);
 }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
+  scanf("%d", &n);
   for (int i = 1; i < n; i++) {
     int u, v;
-    cin >> u >> v;
+    scanf("%d%d", &u, &v);
     edge[u].push_back(v);
     edge[v].push_back(u);
   }
   getHash(1, 0);
-  cout << trees.size();
+  printf("%lu", trees.size());
 }

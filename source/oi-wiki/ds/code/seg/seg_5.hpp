@@ -5,18 +5,16 @@ template <typename T>
 class SegTreeLazyRangeSet {
   vector<T> tree, lazy;
   vector<T> *arr;
-  vector<bool> ifLazy;
   int n, root, n4, end;
 
   void maintain(int cl, int cr, int p) {
     int cm = cl + (cr - cl) / 2;
-    if (cl != cr && ifLazy[p]) {
-      lazy[p * 2] = lazy[p], ifLazy[p * 2] = 1;
-      lazy[p * 2 + 1] = lazy[p], ifLazy[p * 2 + 1] = 1;
+    if (cl != cr && lazy[p]) {
+      lazy[p * 2] = lazy[p];
+      lazy[p * 2 + 1] = lazy[p];
       tree[p * 2] = lazy[p] * (cm - cl + 1);
       tree[p * 2 + 1] = lazy[p] * (cr - cm);
       lazy[p] = 0;
-      ifLazy[p] = 0;
     }
   }
 
@@ -33,7 +31,6 @@ class SegTreeLazyRangeSet {
   void range_set(int l, int r, T val, int cl, int cr, int p) {
     if (l <= cl && cr <= r) {
       lazy[p] = val;
-      ifLazy[p] = 1;
       tree[p] = (cr - cl + 1) * val;
       return;
     }
@@ -61,7 +58,6 @@ class SegTreeLazyRangeSet {
     n4 = n * 4;
     tree = vector<T>(n4, 0);
     lazy = vector<T>(n4, 0);
-    ifLazy = vector<bool>(n4, 0);
     arr = &v;
     end = n - 1;
     root = 1;
@@ -79,5 +75,5 @@ class SegTreeLazyRangeSet {
 
   T range_sum(int l, int r) { return range_sum(l, r, 0, end, root); }
 
-  void range_set(int l, int r, T val) { range_set(l, r, val, 0, end, root); }
+  void range_set(int l, int r, int val) { range_set(l, r, val, 0, end, root); }
 };

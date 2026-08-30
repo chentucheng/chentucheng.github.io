@@ -1,19 +1,18 @@
 #include <algorithm>
 #include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <iomanip>
-#include <iostream>
 using namespace std;
-constexpr int MAXN = 200010;
-int n, d[MAXN], lc[MAXN], rc[MAXN];
+const int maxn = 200010;
+int n, d[maxn], lc[maxn], rc[maxn];
 double ans = 2e18;
 
 struct node {
   double x, y;
-} s[MAXN];
+} s[maxn];
 
-double L[MAXN], R[MAXN], D[MAXN], U[MAXN];
+double L[maxn], R[maxn], D[maxn], U[maxn];
 
 double dist(int a, int b) {
   return (s[a].x - s[b].x) * (s[a].x - s[b].x) +
@@ -88,11 +87,10 @@ void query(int l, int r, int x) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
-  for (int i = 1; i <= n; i++) cin >> s[i].x >> s[i].y;
+  scanf("%d", &n);
+  for (int i = 1; i <= n; i++) scanf("%lf%lf", &s[i].x, &s[i].y);
   build(1, n);
   for (int i = 1; i <= n; i++) query(1, n, i);
-  cout << fixed << setprecision(4) << sqrt(ans) << '\n';
+  printf("%.4lf\n", sqrt(ans));
   return 0;
 }

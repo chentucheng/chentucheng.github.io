@@ -1,90 +1,77 @@
-#include <cstdio>
-#include <cstring>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
-
-constexpr int N = 150 + 6;
-constexpr int LEN = 1e6 + 6;
-constexpr int SIZE = N * 70 + 6;
-
-int n;
+const int N = 156, L = 1e6 + 6;
 
 namespace AC {
-struct Node {
-  int son[26];
-  int fail;
-  int idx;
-
-  void init() {
-    memset(son, 0, sizeof(son));
-    idx = fail = 0;
-  }
-} tr[SIZE];
-
-int tot;
+const int SZ = N * 80;
+int tot, tr[SZ][26];
+int fail[SZ], idx[SZ], val[SZ];
+int cnt[N];  // 记录第 i 个字符串的出现次数
 
 void init() {
+  memset(fail, 0, sizeof(fail));
+  memset(tr, 0, sizeof(tr));
+  memset(val, 0, sizeof(val));
+  memset(cnt, 0, sizeof(cnt));
+  memset(idx, 0, sizeof(idx));
   tot = 0;
-  tr[0].init();
 }
 
-void insert(char s[], int idx) {  // 将第 idx 个字符串 s 插入
+void insert(char *s, int id) {  // id 表示原始字符串的编号
   int u = 0;
   for (int i = 1; s[i]; i++) {
-    int &son = tr[u].son[s[i] - 'a'];
-    if (!son) son = ++tot, tr[son].init();
-    u = son;
+    if (!tr[u][s[i] - 'a']) tr[u][s[i] - 'a'] = ++tot;
+    u = tr[u][s[i] - 'a'];  // 转移
   }
-  tr[u].idx = idx;
+  idx[u] = id;  // 以 u 为结尾的字符串编号为 idx[u]
 }
 
+queue<int> q;
+
 void build() {
-  queue<int> q;
   for (int i = 0; i < 26; i++)
-    if (tr[0].son[i]) q.push(tr[0].son[i]);
-  while (!q.empty()) {
+    if (tr[0][i]) q.push(tr[0][i]);
+  while (q.size()) {
     int u = q.front();
     q.pop();
     for (int i = 0; i < 26; i++) {
-      if (tr[u].son[i]) {
-        tr[tr[u].son[i]].fail = tr[tr[u].fail].son[i];
-        q.push(tr[u].son[i]);
+      if (tr[u][i]) {
+        fail[tr[u][i]] =
+            tr[fail[u]][i];  // fail数组：同一字符可以匹配的其他位置
+        q.push(tr[u][i]);
       } else
-        tr[u].son[i] = tr[tr[u].fail].son[i];
+        tr[u][i] = tr[fail[u]][i];
     }
   }
 }
 
-int query(char t[], int cnt[]) {
+int query(char *t) {  // 返回最大的出现次数
   int u = 0, res = 0;
   for (int i = 1; t[i]; i++) {
-    u = tr[u].son[t[i] - 'a'];
-    for (int j = u; j; j = tr[j].fail)
-      ++cnt[tr[j].idx];  // 统计每个字符串出现的次数
+    u = tr[u][t[i] - 'a'];
+    for (int j = u; j; j = fail[j]) val[j]++;
   }
-  for (int i = 0; i <= tot; ++i)
-    if (tr[i].idx) res = max(res, cnt[tr[i].idx]);
+  for (int i = 0; i <= tot; i++)
+    if (idx[i]) res = max(res, val[i]), cnt[idx[i]] = val[i];
   return res;
 }
 }  // namespace AC
 
-char s[N][75], t[LEN];
-int cnt[N];  // 每一个字符串出现的次数
+int n;
+char s[N][100], t[L];
 
 int main() {
-  while (scanf("%d", &n) != EOF && n != 0) {
-    AC::init();
-    for (int i = 1; i <= n; i++) {
-      scanf("%s", s[i] + 1);
-      AC::insert(s[i], i);
-      cnt[i] = 0;
-    }
+  while (~scanf("%d", &n)) {
+    if (n == 0) break;
+    AC::init();  // 数组清零
+    for (int i = 1; i <= n; i++)
+      scanf("%s", s[i] + 1), AC::insert(s[i], i);  // 需要记录该字符串的序号
     AC::build();
     scanf("%s", t + 1);
-    int x = AC::query(t, cnt);
+    int x = AC::query(t);
     printf("%d\n", x);
     for (int i = 1; i <= n; i++)
-      if (cnt[i] == x) printf("%s\n", s[i] + 1);
+      if (AC::cnt[i] == x) printf("%s\n", s[i] + 1);
   }
   return 0;
 }

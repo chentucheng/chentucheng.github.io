@@ -1,8 +1,7 @@
-#include <deque>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-constexpr int INF = 1 << 29;
+#define INF (1 << 29)
 int n, m;
 char grid[1001][1001];
 int dist[1001][1001][4];

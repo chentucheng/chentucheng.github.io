@@ -1,7 +1,4 @@
-#include <cassert>
-#include <iostream>
-#include <numeric>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -61,5 +58,4 @@ int main() {
       }
     }
   }
-  return 0;
 }

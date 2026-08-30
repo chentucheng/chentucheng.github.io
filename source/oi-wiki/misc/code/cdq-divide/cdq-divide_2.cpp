@@ -1,8 +1,8 @@
 // 仔细推一下就是和三维偏序差不多的式子了，基本就是一个三维偏序的板子
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-using ll = long long;
+typedef long long ll;
 int n;
 int m;
 
@@ -33,8 +33,9 @@ struct data_ {
 int rv[100010];
 ll res;
 
-// 重写两个比较
-bool cmp1(const data_& a, const data_& b) { return a.val < b.val; }
+bool cmp1(const data_& a, const data_& b) {
+  return a.val < b.val;
+}  // 重写两个比较
 
 bool cmp2(const data_& a, const data_& b) { return a.del < b.del; }
 
@@ -88,15 +89,14 @@ void solve(int l, int r) {  // 底下是具体的式子，套用
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  scanf("%d%d", &n, &m);
   for (int i = 1; i <= n; i++) {
-    cin >> a[i].val;
+    scanf("%d", &a[i].val);
     rv[a[i].val] = i;
   }
   for (int i = 1; i <= m; i++) {
     int p;
-    cin >> p;
+    scanf("%d", &p);
     a[rv[p]].del = i;
   }
   for (int i = 1; i <= n; i++) {
@@ -112,7 +112,7 @@ int main() {
   solve(0, n);
   sort(a + 1, a + n + 1, cmp2);
   for (int i = 1; i <= m; i++) {
-    cout << res << '\n';
+    printf("%lld\n", res);
     res -= a[i].ans;
   }
   return 0;

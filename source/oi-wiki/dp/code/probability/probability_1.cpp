@@ -1,15 +1,12 @@
-#include <cstring>
-#include <iomanip>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;
+typedef long long ll;
 int w, b;
 double dp[1010][1010];
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> w >> b;
+  scanf("%d %d", &w, &b);
   memset(dp, 0, sizeof(dp));
   for (int i = 1; i <= w; i++) dp[i][0] = 1;  // 初始化
   for (int i = 1; i <= b; i++) dp[0][i] = 0;
@@ -26,6 +23,6 @@ int main() {
       }
     }
   }
-  cout << fixed << setprecision(9) << dp[w][b] << '\n';
+  printf("%.9lf\n", dp[w][b]);
   return 0;
 }

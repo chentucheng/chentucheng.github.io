@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstdio>
 #include <cstring>
 #include <iostream>
 using namespace std;
@@ -72,13 +73,13 @@ void fft(Complex y[], int len, int on) {
   }
 }
 
-constexpr int MAXN = 200020;
+const int MAXN = 200020;
 Complex x1[MAXN], x2[MAXN];
 char str1[MAXN / 2], str2[MAXN / 2];
 int sum[MAXN];
 
 int main() {
-  while (cin >> str1 >> str2) {
+  while (scanf("%s%s", str1, str2) == 2) {
     int len1 = strlen(str1);
     int len2 = strlen(str2);
     int len = 1;
@@ -108,8 +109,8 @@ int main() {
     }
     len = len1 + len2 - 1;
     while (sum[len] == 0 && len > 0) len--;
-    for (int i = len; i >= 0; i--) cout << char(sum[i] + '0');
-    cout << '\n';
+    for (int i = len; i >= 0; i--) printf("%c", sum[i] + '0');
+    printf("\n");
   }
   return 0;
 }

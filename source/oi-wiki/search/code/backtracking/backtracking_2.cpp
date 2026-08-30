@@ -1,6 +1,6 @@
 // 该代码为回溯法的 BFS 实现
+#include <cstdio>
 #include <cstring>
-#include <iostream>
 #include <queue>
 using namespace std;
 int n, m, k, x, y, a, b, ans;
@@ -42,14 +42,13 @@ void bfs() {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m >> k;
-  cin >> x >> y >> a >> b;
+  scanf("%d%d%d", &n, &m, &k);
+  scanf("%d%d%d%d", &x, &y, &a, &b);
   for (int i = 1, aa, bb; i <= k; i++) {
-    cin >> aa >> bb;
-    vis[aa][bb] = true;  // 障碍位置不可通过
+    scanf("%d%d", &aa, &bb);
+    vis[aa][bb] = 1;  // 障碍位置不可通过
   }
   bfs();
-  cout << ans;
+  printf("%d", ans);
   return 0;
 }

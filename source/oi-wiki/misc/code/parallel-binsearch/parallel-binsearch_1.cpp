@@ -1,7 +1,7 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int N = 200020;
+const int N = 200020;
+const int INF = 1e9;
 int n, m;
 int ans[N];
 // BIT begin
@@ -70,12 +70,11 @@ pair<int, int> b[N];
 int toRaw[N];
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  scanf("%d%d", &n, &m);
   // read and discrete input data
   for (int i = 1; i <= n; i++) {
     int x;
-    cin >> x;
+    scanf("%d", &x);
     b[i].first = x;
     b[i].second = i;
   }
@@ -91,9 +90,9 @@ int main() {
   }
   for (int i = 1; i <= m; i++) {
     int l, r, k;
-    cin >> l >> r >> k;
+    scanf("%d%d%d", &l, &r, &k);
     q[++tot] = {l, r, k, i, 2};
   }
   solve(0, cnt + 1, 1, tot);
-  for (int i = 1; i <= m; i++) cout << toRaw[ans[i]] << '\n';
+  for (int i = 1; i <= m; i++) printf("%d\n", toRaw[ans[i]]);
 }

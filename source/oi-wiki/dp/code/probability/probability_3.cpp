@@ -1,26 +1,23 @@
-#include <algorithm>
-#include <iomanip>
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-constexpr int MAXN = 2010;
+const int maxn = 2010;
 int n, m, v, e;
-int f[MAXN][MAXN], c[MAXN], d[MAXN];
-double dp[MAXN][MAXN][2], p[MAXN];
+int f[maxn][maxn], c[maxn], d[maxn];
+double dp[maxn][maxn][2], p[maxn];
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m >> v >> e;
-  for (int i = 1; i <= n; i++) cin >> c[i];
-  for (int i = 1; i <= n; i++) cin >> d[i];
-  for (int i = 1; i <= n; i++) cin >> p[i];
+  scanf("%d %d %d %d", &n, &m, &v, &e);
+  for (int i = 1; i <= n; i++) scanf("%d", &c[i]);
+  for (int i = 1; i <= n; i++) scanf("%d", &d[i]);
+  for (int i = 1; i <= n; i++) scanf("%lf", &p[i]);
   for (int i = 1; i <= v; i++)
     for (int j = 1; j < i; j++) f[i][j] = f[j][i] = 1e9;
 
   int u, V, w;
   for (int i = 1; i <= e; i++) {
-    cin >> u >> V >> w;
+    scanf("%d %d %d", &u, &V, &w);
     f[u][V] = f[V][u] = min(w, f[u][V]);
   }
 
@@ -51,7 +48,7 @@ int main() {
 
   double ans = 1e9;
   for (int i = 0; i <= m; i++) ans = min(dp[n][i][0], min(dp[n][i][1], ans));
-  cout << fixed << setprecision(2) << ans;
+  printf("%.2lf", ans);
 
   return 0;
 }

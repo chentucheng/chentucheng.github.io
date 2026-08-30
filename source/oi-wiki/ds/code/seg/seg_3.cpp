@@ -44,7 +44,7 @@ int getsum(int l, int r, int s, int t, int p) {  // 取得答案，和前面一�
 }
 
 int main() {
-  std::ios::sync_with_stdio(false);
+  std::ios::sync_with_stdio(0);
   std::cin >> n;
   for (int i = 1; i <= n; i++) std::cin >> a[i];
   build(1, n, 1);

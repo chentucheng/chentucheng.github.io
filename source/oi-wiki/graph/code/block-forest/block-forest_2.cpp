@@ -1,11 +1,11 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 #include <set>
 #include <vector>
 
-constexpr int MN = 100005;
-constexpr int MS = 524288;
-constexpr int Inf = 0x7fffffff;
+const int MN = 100005;
+const int MS = 524288;
+const int Inf = 0x7fffffff;
 
 int N, M, Q, cnt;
 int w[MN * 2];
@@ -92,17 +92,13 @@ int Qur(int i, int l, int r, int a, int b) {  // 查询
   return std::min(Qur(ls, a, b), Qur(rs, a, b));
 }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> N >> M >> Q;
-  for (int i = 1; i <= N; ++i) cin >> w[i];
+  scanf("%d%d%d", &N, &M, &Q);
+  for (int i = 1; i <= N; ++i) scanf("%d", &w[i]);
   cnt = N;
   for (int i = 1; i <= M; ++i) {
     int u, v;
-    cin >> u >> v;
+    scanf("%d%d", &u, &v);
     G[u].push_back(v);
     G[v].push_back(u);
   }
@@ -114,7 +110,7 @@ int main() {
   for (int q = 1; q <= Q; ++q) {
     char opt[3];
     int x, y;
-    cin >> opt >> x >> y;
+    scanf("%s%d%d", opt, &x, &y);
     if (*opt == 'C') {
       Mdf(1, 1, cnt, dfn[x], y);
       if (faz[x]) {
@@ -137,7 +133,7 @@ int main() {
       if (dfn[x] > dfn[y]) std::swap(x, y);
       Ans = std::min(Ans, Qur(1, 1, cnt, dfn[x], dfn[y]));
       if (x > N) Ans = std::min(Ans, w[faz[x]]);
-      cout << Ans << '\n';
+      printf("%d\n", Ans);
     }
   }
   return 0;

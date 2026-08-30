@@ -1,9 +1,8 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
 
-constexpr int MOD = 1e9 + 7;
-constexpr int inv2 = (MOD + 1) / 2;
+const int MOD = 1e9 + 7;
+const int inv2 = (MOD + 1) / 2;
 
 template <typename T>
 int mint(T x) {
@@ -13,18 +12,16 @@ int mint(T x) {
 }
 
 int add(int x, int y) {
-  return x + y >= MOD ? x + y - MOD : x + y;  // 防止大于模数
-}
+  return x + y >= MOD ? x + y - MOD : x + y;
+}  // 防止大于模数
 
 int mul(int x, int y) { return (long long)1 * x * y % MOD; }
 
-int sub(int x, int y) {
-  return x < y ? x - y + MOD : x - y;  // 防负数
-}
+int sub(int x, int y) { return x < y ? x - y + MOD : x - y; }  // 防负数
 
 namespace PNS {
-constexpr int N = 2e6 + 5;
-constexpr int M = 35;
+const int N = 2e6 + 5;
+const int M = 35;
 
 long long global_n;
 
@@ -105,7 +102,7 @@ int G(long long n) { return add(S1(n), mul(2, S2(n / 2))); }
 void dfs(long long d, int hd, int pid) {
   ans = add(ans, mul(hd, G(global_n / d)));
 
-  for (int i = pid; i <= pcnt; ++i) {
+  for (int i = pid, p; i <= pcnt; ++i) {
     if (i > 1 && d > global_n / prime[i] / prime[i]) break;  // 剪枝
 
     int c = 2;
@@ -141,7 +138,7 @@ int solve(long long n) {
 int main() {
   PNS::init();  // 预处理函数
   long long n;
-  cin >> n;
-  cout << PNS::solve(n) << '\n';
+  scanf("%lld", &n);
+  printf("%d\n", PNS::solve(n));
   return 0;
 }

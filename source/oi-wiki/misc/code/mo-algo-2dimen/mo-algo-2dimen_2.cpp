@@ -1,7 +1,19 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+
+void read(int& a) {
+  a = 0;
+  char c;
+  while ((c = getchar()) < 48)
+    ;
+  do a = (a << 3) + (a << 1) + (c ^ 48);
+  while ((c = getchar()) > 47);
+}
+
+void write(int x) {
+  if (x > 9) write(x / 10);
+  putchar(x % 10 + '0');
+}
 
 int n, q, a[501][501], ans[60001];
 int disc[250001], cntdisc;  // 离散化用
@@ -93,13 +105,13 @@ void mo_algo() {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> q;
+  read(n);
+  read(q);
   nn = n * n;
   for (int i = 1; i <= n; ++i)
     for (int j = 1; j <= n; ++j) {
       int x;
-      cin >> x;
+      read(x);
       a[i][j] = disc[++cntdisc] = x;
     }
   sort(disc + 1, disc + 1 + cntdisc);
@@ -109,11 +121,15 @@ int main() {
       a[i][j] = lower_bound(disc + 1, disc + 1 + cntdisc, a[i][j]) - disc;
   for (int i = 1; i <= q; ++i) {
     int x1, y1, x2, y2, k;
-    cin >> x1 >> y1 >> x2 >> y2 >> k;
+    read(x1);
+    read(y1);
+    read(x2);
+    read(y2);
+    read(k);
     Q[++Qcnt] = {x1, y1, x2, y2, k, i};
   }
 
   mo_algo();
-  for (int i = 1; i <= q; ++i) cout << ans[i] << '\n';
+  for (int i = 1; i <= q; ++i) write(ans[i]), puts("");
   return 0;
 }

@@ -1,18 +1,15 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using ull = unsigned long long;
-constexpr int MAXN = 1e5 + 5;
+const int MAXN = 1e5 + 5;
 
 ull deg(ull num, int deg) { return num & (1ull << deg); }
 
 ull a[MAXN];
-using std::cin;
-using std::cout;
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   int n;
-  cin >> n;
-  for (int i = 1; i <= n; ++i) cin >> a[i];
+  scanf("%d", &n);
+  for (int i = 1; i <= n; ++i) scanf("%llu", &a[i]);
   int row = 1;
   for (int col = 63; ~col && row <= n; --col) {
     for (int i = row; i <= n; ++i) {
@@ -34,6 +31,6 @@ int main() {
   for (int i = 1; i < row; ++i) {
     ans ^= a[i];
   }
-  cout << ans << '\n';
+  printf("%llu\n", ans);
   return 0;
 }

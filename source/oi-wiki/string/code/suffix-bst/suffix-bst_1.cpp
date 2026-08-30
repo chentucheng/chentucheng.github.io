@@ -1,19 +1,17 @@
-#include <algorithm>
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
-constexpr int N = 1e6 + 5;
-constexpr double INF = 1e18;
+const int N = 1e6 + 5;
+const double INF = 1e18;
 
 int n, m, sa[N];
-string t;
+char t[N];
 
 // SuffixBST(SGT Ver)
 
 // 顺序加入，查询时将询问串翻转
 // 以i开始的后缀，对应节点的编号为i
-constexpr double alpha = 0.75;
+const double alpha = 0.75;
 int root;
 int sz[N], L[N], R[N];
 double tag[N];
@@ -91,9 +89,8 @@ void inorder(int rt) {
 }
 
 void solve(int Case) {
-  cin >> t;
-  n = t.size();
-  t = " " + t;
+  scanf("%s", t + 1);
+  n = strlen(t + 1);
 
   init();
   for (int i = n; i >= 1; --i) {
@@ -104,12 +101,11 @@ void solve(int Case) {
   m = 0;
   inorder(root);
 
-  for (int i = 1; i <= n; ++i) cout << sa[i] << ' ';
-  cout << '\n';
+  for (int i = 1; i <= n; ++i) printf("%d ", sa[i]);
+  printf("\n");
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   solve(1);
   return 0;
 }

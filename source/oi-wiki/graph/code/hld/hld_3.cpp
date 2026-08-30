@@ -1,7 +1,6 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int N = 1000005;
+const int N = 1000005;
 
 struct edge {
   int to, next;
@@ -13,7 +12,7 @@ int *f[N], g[N], mxp[N];
 int dfn[N];
 
 void add(int x, int y) {
-  e[++tot] = edge{y, head[x]};
+  e[++tot] = (edge){y, head[x]};
   head[x] = tot;
 }
 
@@ -56,16 +55,15 @@ void getans(int x) {  // 暴力合并算答案
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
+  scanf("%d", &n);
   for (int i = 1; i < n; i++) {
     int x, y;
-    cin >> x >> y;
+    scanf("%d%d", &x, &y);
     add(x, y);
     add(y, x);
   }
   dfs1(1);
   dfs2(1);
   getans(1);
-  for (int i = 1; i <= n; i++) cout << mxp[i] << '\n';
+  for (int i = 1; i <= n; i++) printf("%d\n", mxp[i]);
 }

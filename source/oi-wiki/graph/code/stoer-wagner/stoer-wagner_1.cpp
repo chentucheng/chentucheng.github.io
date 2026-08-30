@@ -1,7 +1,6 @@
-#include <cstring>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int N = 601;
+const int N = 601;
 int fa[N], siz[N], edge[N][N];
 
 int find(int x) { return fa[x] == x ? x : fa[x] = find(fa[x]); }
@@ -32,7 +31,7 @@ int contract(int &s, int &t) {  // Find s,t
   return mincut;
 }
 
-constexpr int inf = 0x3f3f3f3f;
+const int inf = 0x3f3f3f3f;
 
 int Stoer_Wagner() {
   int mincut, i, j, s, t, ans;
@@ -48,7 +47,7 @@ int Stoer_Wagner() {
 }
 
 int main() {
-  ios::sync_with_stdio(false), cin.tie(nullptr);
+  ios::sync_with_stdio(0), cin.tie(0);
   cin >> n >> m;
   if (m < n - 1) {
     cout << 0;

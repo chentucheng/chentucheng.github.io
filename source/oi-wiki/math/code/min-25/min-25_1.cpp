@@ -1,9 +1,10 @@
 /* 「LOJ #6053」简单的函数 */
+#include <algorithm>
 #include <cmath>
-#include <iostream>
+#include <cstdio>
 
-constexpr int MAXS = 200000;  // 2sqrt(n)
-constexpr int mod = 1000000007;
+const int maxs = 200000;  // 2sqrt(n)
+const int mod = 1000000007;
 
 template <typename x_t, typename y_t>
 void inc(x_t &x, const y_t &y) {
@@ -38,7 +39,7 @@ long long sqrll(const _Tp &x) {  // 平方函数
   return (long long)x * x;
 }
 
-int pri[MAXS / 7], lpf[MAXS + 1], spri[MAXS + 1], pcnt;
+int pri[maxs / 7], lpf[maxs + 1], spri[maxs + 1], pcnt;
 
 void sieve(const int &n) {
   for (int i = 2; i <= n; ++i) {
@@ -53,12 +54,12 @@ void sieve(const int &n) {
 
 long long global_n;
 int lim;
-int le[MAXS + 1],  // x <= \sqrt{n}
-    ge[MAXS + 1];  // x > \sqrt{n}
+int le[maxs + 1],  // x <= \sqrt{n}
+    ge[maxs + 1];  // x > \sqrt{n}
 #define idx(v) (v <= lim ? le[v] : ge[global_n / v])
 
-int G[MAXS + 1][2], Fprime[MAXS + 1];
-long long lis[MAXS + 1];
+int G[maxs + 1][2], Fprime[maxs + 1];
+long long lis[maxs + 1];
 int cnt;
 
 void init(const long long &n) {
@@ -89,7 +90,7 @@ void calcFprime() {
 
 int f_p(const int &p, const int &c) {
   /* f(p^{c}) = p xor c */
-  return p ^ c;
+  return p xor c;
 }
 
 int F(const int &k, const long long &n) {
@@ -107,18 +108,14 @@ int F(const int &k, const long long &n) {
   return ans % mod;
 }
 
-using std::cin;
-using std::cout;
-
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> global_n;
+  scanf("%lld", &global_n);
   lim = sqrt(global_n);  // 上限
 
   sieve(lim + 1000);  // 预处理
   init(global_n);
   calcFprime();
-  cout << (F(1, global_n) + 1ll + mod) % mod << '\n';
+  printf("%lld\n", (F(1, global_n) + 1ll + mod) % mod);
 
   return 0;
 }

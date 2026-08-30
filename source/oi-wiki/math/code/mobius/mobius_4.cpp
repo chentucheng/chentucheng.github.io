@@ -1,17 +1,17 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-constexpr long long N = 5e4 + 5;
+const long long N = 5e4 + 5;
 long long n, m, T, pr[N], mu[N], d[N], t[N],
     cnt;  // t 表示 i 的最小质因子出现的次数
 bool bp[N];
 
 void prime_work(long long k) {
-  bp[0] = bp[1] = true, mu[1] = 1, d[1] = 1;
+  bp[0] = bp[1] = 1, mu[1] = 1, d[1] = 1;
   for (long long i = 2; i <= k; i++) {  // 线性筛
     if (!bp[i]) pr[++cnt] = i, mu[i] = -1, d[i] = 2, t[i] = 1;
     for (long long j = 1; j <= cnt && i * pr[j] <= k; j++) {
-      bp[i * pr[j]] = true;
+      bp[i * pr[j]] = 1;
       if (i % pr[j] == 0) {
         mu[i * pr[j]] = 0;
         d[i * pr[j]] = d[i] / (t[i] + 1) * (t[i] + 2);
@@ -38,12 +38,11 @@ long long solve() {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> T;
+  scanf("%lld", &T);
   prime_work(50000);  // 预处理
   while (T--) {
-    cin >> n >> m;
-    cout << solve() << '\n';
+    scanf("%lld%lld", &n, &m);
+    printf("%lld\n", solve());
   }
   return 0;
 }

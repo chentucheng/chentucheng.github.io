@@ -1,13 +1,11 @@
-#include <algorithm>
-#include <cmath>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-constexpr int N = 5e5 + 5;
+const int N = 5e5 + 5;
 
 struct PlusMinusOneRMQ {  // RMQ
   // Copyright (C) 2018 Skqliao. All rights served.
-  constexpr static int M = 9;
+  const static int M = 9;
 
   int blocklen, block, Minv[N], F[N / M * 2 + 5][M << 1], T[N], f[1 << M][M][M],
       S[N];
@@ -103,11 +101,11 @@ void init(int n) {
 
 void addedge(int u, int v) {  // 加边
   ++tot;
-  e[tot] = Edge{v, head[u]};
+  e[tot] = (Edge){v, head[u]};
   head[u] = tot;
 
   ++tot;
-  e[tot] = Edge{u, head[v]};
+  e[tot] = (Edge){u, head[v]};
   head[v] = tot;
 }
 
@@ -143,13 +141,12 @@ int LCA(int u, int v) {  // 求解LCA，看题解用RMQ的方法
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m >> s;
+  scanf("%d %d %d", &n, &m, &s);
 
   init(n);
   int u, v;
   for (int i = 1; i <= n - 1; ++i) {
-    cin >> u >> v;
+    scanf("%d %d", &u, &v);
     addedge(u, v);
   }
 
@@ -159,8 +156,8 @@ int main() {
   build_lca();
 
   for (int i = 1; i <= m; ++i) {
-    cin >> u >> v;
-    cout << LCA(u, v) << '\n';
+    scanf("%d %d", &u, &v);
+    printf("%d\n", LCA(u, v));
   }
 
   return 0;

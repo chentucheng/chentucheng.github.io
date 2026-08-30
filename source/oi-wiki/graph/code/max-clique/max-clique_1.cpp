@@ -1,7 +1,9 @@
+#include <algorithm>
+#include <cstdio>
 #include <cstring>
 #include <iostream>
 using namespace std;
-constexpr int MAXN = 105;
+const int MAXN = 105;
 
 struct MaxClique {
   bool g[MAXN][MAXN];
@@ -57,18 +59,17 @@ struct MaxClique {
 } maxclique;
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
   int n;
-  while (cin >> n, n) {
+  while (scanf("%d", &n), n) {
     maxclique.init(n);
     for (int i = 1; i <= n; i++) {
       for (int j = 1; j <= n; j++) {
         int x;
-        cin >> x;
+        scanf("%d", &x);
         maxclique.addedge(i, j, x);
       }
     }
-    cout << maxclique.solver() << '\n';
+    printf("%d\n", maxclique.solver());
   }
   return 0;
 }

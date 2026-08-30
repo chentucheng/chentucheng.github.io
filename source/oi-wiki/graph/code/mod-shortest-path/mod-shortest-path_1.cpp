@@ -1,19 +1,18 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
-using ll = long long;
-constexpr int MAXN = 100010;
-constexpr ll linf = (1ull << 63) - 1;
+typedef long long ll;
+const int maxn = 100010;
+const int INF = 0x3f3f3f3f;
 
 ll h, x, y, z;
-ll head[MAXN << 1], tot;
-ll dis[MAXN], vis[MAXN];
+ll head[maxn << 1], tot;
+ll dis[maxn], vis[maxn];
 queue<int> q;
 
 struct edge {
   ll to, next, w;
-} e[MAXN << 1];
+} e[maxn << 1];
 
 void add(ll u, ll v, ll w) {
   e[++tot] = edge{v, head[u], w};
@@ -21,9 +20,9 @@ void add(ll u, ll v, ll w) {
 }
 
 void spfa() {  // spfa算法，可看最短路部分
-  dis[0] = 0;
-  vis[0] = 1;
-  q.push(0);
+  dis[1] = 1;
+  vis[1] = 1;
+  q.push(1);
   while (!q.empty()) {
     int u = q.front();
     q.pop();
@@ -42,24 +41,22 @@ void spfa() {  // spfa算法，可看最短路部分
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> h;
-  cin >> x >> y >> z;
+  memset(dis, INF, sizeof(dis));
+  scanf("%lld", &h);
+  scanf("%lld %lld %lld", &x, &y, &z);
   if (x == 1 || y == 1 || z == 1) {
-    cout << h << '\n';
+    printf("%lld\n", h);
     return 0;
   }
-  --h;
   for (int i = 0; i < x; i++) {
     add(i, (i + z) % x, z);
     add(i, (i + y) % x, y);
-    dis[i] = linf;
   }
   spfa();
   ll ans = 0;
   for (int i = 0; i < x; i++) {
     if (h >= dis[i]) ans += (h - dis[i]) / x + 1;
   }
-  cout << ans << '\n';
+  printf("%lld\n", ans);
   return 0;
 }

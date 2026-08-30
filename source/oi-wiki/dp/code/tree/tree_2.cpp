@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 #include <vector>
 using namespace std;
 int f[305][305], s[305], n, m;
@@ -21,14 +21,13 @@ int dfs(int u) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
+  scanf("%d%d", &n, &m);
   for (int i = 1; i <= n; i++) {
     int k;
-    cin >> k >> s[i];
+    scanf("%d%d", &k, &s[i]);
     e[k].push_back(i);
   }
   dfs(0);
-  cout << f[0][m + 1];
+  printf("%d", f[0][m + 1]);
   return 0;
 }

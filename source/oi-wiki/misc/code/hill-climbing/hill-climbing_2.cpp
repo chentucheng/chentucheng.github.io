@@ -1,7 +1,6 @@
 #include <cmath>
-#include <iomanip>
-#include <iostream>
-constexpr int N = 10005;
+#include <cstdio>
+const int N = 10005;
 int n, x[N], y[N], w[N];
 double ansx, ansy;
 
@@ -24,15 +23,13 @@ void hillclimb() {
 }
 
 int main() {
-  std::cin.tie(nullptr)->sync_with_stdio(false);
-  std::cin >> n;
+  scanf("%d", &n);
   for (int i = 1; i <= n; ++i) {
-    std::cin >> x[i] >> y[i] >> w[i];
+    scanf("%d%d%d", &x[i], &y[i], &w[i]);
     ansx += x[i], ansy += y[i];
   }
   ansx /= n, ansy /= n;
   hillclimb();
-  std::cout << std::fixed << std::setprecision(3) << ansx << ' ' << ansy
-            << '\n';
+  printf("%.3lf %.3lf\n", ansx, ansy);
   return 0;
 }

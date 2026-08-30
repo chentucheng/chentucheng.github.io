@@ -3,21 +3,21 @@
 在某些情况下可能较简单，但对于此题块状链表复杂度有可能无法通过而且实现较繁琐，所以这份代码采用
 FHQ Treap 实现。
 */
-#include <iostream>
-#include <vector>
-constexpr int N = 1000000;
+#include <bits/stdc++.h>
+#define N 1000000
+#define int long long
 using namespace std;
 /*FHQ TREAP*/
-long long rt, tot, f[N], rnd[N], ls[N], rs[N], siz[N], tag[N], val[N], sum[N],
-    pd[N], pds[N];
+int rt, tot, f[N], rnd[N], ls[N], rs[N], siz[N], tag[N], val[N], sum[N], pd[N],
+    pds[N];
 
-void pushup(long long x) {
+void pushup(int x) {
   siz[x] = siz[ls[x]] + siz[rs[x]] + 1;
   sum[x] = sum[ls[x]] + sum[rs[x]] + val[x];
   pds[x] = pds[ls[x]] + pds[rs[x]] + pd[x];
 }
 
-void link(long long x, long long c, long long y) {
+void link(int x, int c, int y) {
   if (c)
     rs[x] = y;
   else
@@ -26,7 +26,7 @@ void link(long long x, long long c, long long y) {
   pushup(x);
 }
 
-long long newNode(long long x, long long y) {
+int newNode(int x, int y) {
   siz[++tot] = 1;
   val[tot] = sum[tot] = x;
   pd[tot] = pds[tot] = y;
@@ -34,19 +34,19 @@ long long newNode(long long x, long long y) {
   return tot;
 }
 
-void setTag(long long x, long long v) {
+void setTag(int x, int v) {
   tag[x] += v;
   sum[x] += v * pds[x];
   val[x] += v * pd[x];
 }
 
-void pushdown(long long x) {
+void pushdown(int x) {
   if (ls[x]) setTag(ls[x], tag[x]);
   if (rs[x]) setTag(rs[x], tag[x]);
   tag[x] = 0;
 }
 
-void split(long long now, long long k, long long &x, long long &y) {
+void split(int now, int k, int &x, int &y) {
   f[now] = 0;
   if (!now) {
     x = y = 0;
@@ -64,7 +64,7 @@ void split(long long now, long long k, long long &x, long long &y) {
   }
 }
 
-long long merge(long long x, long long y) {
+int merge(int x, int y) {
   if (!x || !y) return x | y;
   if (rnd[x] < rnd[y]) {
     pushdown(x);
@@ -77,8 +77,8 @@ long long merge(long long x, long long y) {
   }
 }
 
-long long rnk(long long x) {
-  long long c = 1, ans = 0;
+int rnk(int x) {
+  int c = 1, ans = 0;
   while (x) {
     if (c) ans += siz[ls[x]] + 1;
     c = (rs[f[x]] == x);
@@ -88,10 +88,10 @@ long long rnk(long long x) {
 }
 
 /*ETT*/
-long long s[N], e[N];
+int s[N], e[N];
 
-void add(long long x, long long v) {
-  long long a, b, c;
+void add(int x, int v) {
+  int a, b, c;
   split(rt, rnk(s[x]) - 1, a, b);
   split(b, rnk(e[x]) - rnk(s[x]) + 1, b,
         c);  // 这里 b 是我们要进行操作的子树的括号序列。
@@ -99,16 +99,16 @@ void add(long long x, long long v) {
   rt = merge(merge(a, b), c);
 }
 
-long long query(long long x) {
-  long long a, b;
+int query(int x) {
+  int a, b;
   split(rt, rnk(s[x]), a, b);
-  long long ans = sum[a];
+  int ans = sum[a];
   rt = merge(a, b);
   return ans;
 }
 
-void changeFa(long long x, long long y) {
-  long long a, b, c, d;
+void changeFa(int x, int y) {
+  int a, b, c, d;
   split(rt, rnk(s[x]) - 1, a, b);
   split(b, rnk(e[x]) - rnk(s[x]) + 1, b, c);
   a = merge(
@@ -119,10 +119,10 @@ void changeFa(long long x, long long y) {
 }
 
 /*main function*/
-long long n, m, w[N];
-vector<long long> v[N];
+int n, m, w[N];
+vector<int> v[N];
 
-void dfs(long long x) {
+void dfs(int x) {
   rt = merge(rt, s[x] = newNode(w[x], 1));
   for (auto to : v[x]) dfs(to);
   rt = merge(rt, e[x] = newNode(-w[x], -1));
@@ -130,27 +130,27 @@ void dfs(long long x) {
 
 signed main() {
   cin >> n;
-  for (long long i = 2; i <= n; i++) {
-    long long f;
+  for (int i = 2; i <= n; i++) {
+    int f;
     cin >> f;
     v[f].push_back(i);
   }
-  for (long long i = 1; i <= n; i++) cin >> w[i];
+  for (int i = 1; i <= n; i++) cin >> w[i];
   dfs(1);
   cin >> m;
-  for (long long i = 1; i <= m; i++) {
+  for (int i = 1; i <= m; i++) {
     char c;
     cin >> c;
     if (c == 'Q') {
-      long long d;
+      int d;
       cin >> d;
       cout << query(d) << endl;
     } else if (c == 'C') {
-      long long x, y;
+      int x, y;
       cin >> x >> y;
       changeFa(x, y);
     } else {
-      long long p, q;
+      int p, q;
       cin >> p >> q;
       add(p, q);
     }

@@ -1,11 +1,12 @@
 #include <iostream>
-constexpr int MOD1 = 39989;
-constexpr int MOD2 = 1000000000;
-constexpr int MAXT = 40000;
+#include <string>
+#define MOD1 39989
+#define MOD2 1000000000
+#define MAXT 40000
 using namespace std;
-using pdi = pair<double, int>;
+typedef pair<double, int> pdi;
 
-constexpr double eps = 1e-9;
+const double eps = 1e-9;
 
 int cmp(double x, double y) {
   if (x - y > eps) return 1;

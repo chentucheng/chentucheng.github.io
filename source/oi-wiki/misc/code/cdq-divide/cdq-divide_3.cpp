@@ -1,11 +1,10 @@
 // 一道二维最长上升子序列的题
 // 为了确定某一个元素是否在最长上升子序列中可以正反跑两遍 CDQ
 #include <algorithm>
-#include <iomanip>
-#include <iostream>
+#include <cstdio>
 using namespace std;
-using db = double;
-constexpr int N = 1e6 + 10;
+typedef double db;
+const int N = 1e6 + 10;
 
 struct data_ {
   int h;
@@ -129,10 +128,9 @@ int len;
 db ans;
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
+  scanf("%d", &n);
   for (int i = 1; i <= n; i++) {
-    cin >> a[0][i].h >> a[0][i].v;
+    scanf("%d%d", &a[0][i].h, &a[0][i].v);
     a[0][i].p = i;
     a[1][i].h = a[0][i].h;
     a[1][i].v = a[0][i].v;
@@ -140,27 +138,26 @@ int main() {
   }
   ih(0);
   solve(0, n, 0);
-  tr = true;
+  tr = 1;
   ih(1);
   solve(0, n, 1);
-  tr = true;
+  tr = 1;
   sort(a[0] + 1, a[0] + n + 1, cmp3);
   sort(a[1] + 1, a[1] + n + 1, cmp3);
   for (int i = 1; i <= n; i++) {
     len = max(len, a[0][i].ma);
   }
-  cout << len << '\n';
+  printf("%d\n", len);
   for (int i = 1; i <= n; i++) {
     if (a[0][i].ma == len) {
       ans += a[0][i].ca;
     }
   }
-  cout << fixed << setprecision(5);
   for (int i = 1; i <= n; i++) {
     if (a[0][i].ma + a[1][i].ma - 1 == len) {
-      cout << (a[0][i].ca * a[1][i].ca) / ans << ' ';
+      printf("%.5lf ", (a[0][i].ca * a[1][i].ca) / ans);
     } else {
-      cout << "0.00000 ";
+      printf("0.00000 ");
     }
   }
   return 0;

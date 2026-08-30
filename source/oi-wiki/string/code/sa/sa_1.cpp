@@ -1,9 +1,11 @@
 #include <cctype>
+#include <cstdio>
 #include <cstring>
 #include <iostream>
+
 using namespace std;
 
-constexpr int N = 1000010;
+const int N = 1000010;
 
 char s[N];
 int n, sa[N], id[N], oldrk[N * 2], rk[N * 2], px[N], cnt[N];
@@ -19,7 +21,8 @@ int main() {
   r = n;
 
   for (i = 1; i <= n; ++i)
-    while (cin >> s[i], !isalpha(s[i]));
+    while (!isalpha(s[i] = getchar()))
+      ;
   for (i = 1; i <= n; ++i)
     rk[i] = rk[2 * n + 2 - i] = s[i];  // 拼接正反两个字符串，中间空出一个字符
 
@@ -43,8 +46,8 @@ int main() {
   }
   // 利用后缀数组O(1)进行判断
   while (l <= r) {
-    cout << (rk[l] < rk[n + 1 - r] ? s[l++] : s[r--]);
-    if ((++tot) % 80 == 0) cout << '\n';  // 回车
+    printf("%c", rk[l] < rk[n + 1 - r] ? s[l++] : s[r--]);
+    if ((++tot) % 80 == 0) puts("");  // 回车
   }
 
   return 0;

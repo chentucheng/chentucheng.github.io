@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
 struct edge {
@@ -26,19 +26,18 @@ void calc(int k) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n;
-  for (int i = 1; i <= n; i++) cin >> f[i][1];
+  scanf("%d", &n);
+  for (int i = 1; i <= n; i++) scanf("%d", &f[i][1]);
   for (int i = 1; i < n; i++) {
     int l, k;
-    cin >> l >> k;
+    scanf("%d%d", &l, &k);
     is_h[l] = 1;
     addedge(k, l);
   }
   for (int i = 1; i <= n; i++)
     if (!is_h[i]) {  // 从根结点开始DFS
       calc(i);
-      cout << max(f[i][1], f[i][0]);
+      printf("%d", max(f[i][1], f[i][0]));
       return 0;
     }
 }

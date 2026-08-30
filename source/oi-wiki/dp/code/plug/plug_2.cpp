@@ -1,12 +1,10 @@
-#include <cassert>
-#include <cstring>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int M = 10;
-constexpr int offset = 3, mask = (1 << offset) - 1;
+const int M = 10;
+const int offset = 3, mask = (1 << offset) - 1;
 int n, m;
 long long ans, d;
-constexpr int MaxSZ = 16796, Prime = 9973;
+const int MaxSZ = 16796, Prime = 9973;
 
 struct hashTable {
   int head[Prime], next[MaxSZ], sz;

@@ -1,5 +1,4 @@
-#include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 constexpr int N(2e5), LG{18};
 
@@ -29,7 +28,7 @@ void upd(int p) {
 }
 
 int build(int l, int r, int dep = 0) {
-  int p{(l + r) >> 1};
+  int p{l + r >> 1};
   nth_element(b + l, b + p, b + r + 1,
               [dep](int x, int y) { return t[x].x[dep] < t[y].x[dep]; });
   int x{b[p]};

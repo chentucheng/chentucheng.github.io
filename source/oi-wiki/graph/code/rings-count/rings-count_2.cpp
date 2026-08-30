@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int n, m, total;
@@ -16,9 +16,9 @@ void addEdge(int u, int v) {
 }
 
 int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-  cin >> n >> m;
-  for (int i = 1; i <= m; i++) cin >> u[i] >> v[i], deg[u[i]]++, deg[v[i]]++;
+  scanf("%d%d", &n, &m);
+  for (int i = 1; i <= m; i++)
+    scanf("%d%d", u + i, v + i), deg[u[i]]++, deg[v[i]]++;
   for (int i = 1; i <= m; i++) {
     if ((deg[u[i]] == deg[v[i]] && u[i] > v[i]) || deg[u[i]] < deg[v[i]])
       swap(u[i], v[i]);
@@ -35,6 +35,6 @@ int main() {
     }
     for (int i = head[u]; i; i = edge[i].nxt) vis[edge[i].to] = false;
   }
-  cout << total << '\n';
+  printf("%d\n", total);
   return 0;
 }

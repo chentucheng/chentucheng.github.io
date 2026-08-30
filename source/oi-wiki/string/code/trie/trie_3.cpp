@@ -1,9 +1,9 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-constexpr int _ = 5e5 + 10;
+const int _ = 5e5 + 10;
 
 namespace trie {
-constexpr int _n = _ * 25;
+const int _n = _ * 25;
 int rt[_];
 int ch[_n][2];
 int w[_n];  //`w[o]` 指节点 `o` 到其父亲节点这条边上数值的数量（权值）。
@@ -80,8 +80,7 @@ void dfs0(int o, int f) {  // 得到fa数组
 
 int V[_];
 
-// 权值函数
-int get(int x) { return (fa[x] == -1 ? 0 : lztar[fa[x]]) + V[x]; }
+int get(int x) { return (fa[x] == -1 ? 0 : lztar[fa[x]]) + V[x]; }  // 权值函数
 
 int main() {
   cin >> n >> m;
@@ -118,7 +117,7 @@ int main() {
       int res = 0;
       res = trie::xorv[trie::rt[x]];
       res ^= get(fa[x]);
-      cout << res << '\n';
+      printf("%d\n", res);
     }
   }
   return 0;
