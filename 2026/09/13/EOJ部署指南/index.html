@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>EOJ部署指南 | CC-Blog</title>
+    <meta name="author" content="XXS" />
+    <meta name="description" content="你想要的，这里…有点难说" />
+    <meta name="keywords" content="C++,游记,生活,Techno,Photo,Math" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avat.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/load.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>CC-BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于作者</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="https://github.com/chentucheng">
+            <i class="fa-brands fa-github fa-fw"></i>
+            <span>&ensp;Github</span>
+        </a>
+        
+        <a href="/oi-wiki/">
+            <i class="fa-solid fa-book fa-fw"></i>
+            <span>&ensp;OI-wiki</span>
+        </a>
+        
+        <a href="/Game/">
+            <i class="fa-solid fa-gamepad fa-fw"></i>
+            <span>&ensp;Game</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;CC-BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于作者</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/chentucheng">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-brands fa-github fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Github</div>
+                    </div>
+                </a>
+                
+                <a href="/oi-wiki/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">OI-wiki</div>
+                    </div>
+                </a>
+                
+                <a href="/Game/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-gamepad fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Game</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>EOJ部署指南</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/13
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Techno/" style="color: #00a596">
+                    Techno
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h6 id="By-1000CC"><a href="#By-1000CC" class="headerlink" title="By 1000CC"></a>By 1000CC</h6><h1 id="一-Install！"><a href="#一-Install！" class="headerlink" title="一.Install！"></a>一.Install！</h1><h2 id="1-材料准备"><a href="#1-材料准备" class="headerlink" title="1.材料准备"></a>1.材料准备</h2><ol>
+<li>网址（Cloudflare的中国很难进）</li>
+<li>CF账号</li>
+<li>GH账号</li>
+<li>Ubuntu</li>
+<li>Git</li>
+<li>Node.js</li>
+<li>wrangler</li>
+</ol>
+<h3 id="Note：如果你没有后三个"><a href="#Note：如果你没有后三个" class="headerlink" title="Note：如果你没有后三个"></a>Note：如果你没有后三个</h3><pre><code class="bash"># 安装 Node.js 22+
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# 安装 Git
+sudo apt install -y git
+
+# 安装 Wrangler
+npm i -g wrangler
+
+# 登录 Cloudflare
+wrangler login
+</code></pre>
+<h2 id="2-克隆项目-安装依赖"><a href="#2-克隆项目-安装依赖" class="headerlink" title="2.克隆项目 + 安装依赖"></a>2.克隆项目 + 安装依赖</h2><p>废话不多说，上Bash</p>
+<pre><code class="bash">git clone https://github.com/wanwusangzhigit/eoj.git
+cd eoj
+
+cd frontend &amp;&amp; npm i
+cd ../backend &amp;&amp; npm i
+</code></pre>
+<h2 id="3-创建-D1-数据库"><a href="#3-创建-D1-数据库" class="headerlink" title="3. 创建 D1 数据库"></a>3. 创建 D1 数据库</h2><pre><code class="bash">cd ~/Code/eoj/backend
+wrangler d1 create oj-database
+</code></pre>
+<p>记下输出的 database_id。</p>
+<h2 id="4-执行数据库迁移"><a href="#4-执行数据库迁移" class="headerlink" title="4. 执行数据库迁移"></a>4. 执行数据库迁移</h2><pre><code class="bash">npx wrangler d1 migrations apply oj-database --remote
+</code></pre>
+<h2 id="5-配置-wrangler-toml"><a href="#5-配置-wrangler-toml" class="headerlink" title="5. 配置 wrangler.toml"></a>5. 配置 wrangler.toml</h2><pre><code class="bash">nano ~/Code/eoj/backend/wrangler.toml
+</code></pre>
+<p>填入：</p>
+<pre><code class="toml">name = &quot;oj-backend&quot;
+main = &quot;src/index.ts&quot;
+compatibility_date = &quot;2024-01-01&quot;
+compatibility_flags = [&quot;nodejs_compat&quot;]
+
+[[d1_databases]]
+binding = &quot;DB&quot;
+database_name = &quot;oj-database&quot;
+database_id = &quot;你的数据库ID&quot;
+
+[assets]
+directory = &quot;./public&quot;
+binding = &quot;ASSETS&quot;
+not_found_handling = &quot;none&quot;
+run_worker_first = true
+
+[[send_email]]
+name = &quot;SEND_EMAIL&quot;
+
+[vars]
+GITHUB_CLIENT_ID = &quot;你的Client ID&quot;
+GITHUB_CLIENT_SECRET = &quot;你的Client Secret&quot;
+GITHUB_TOKEN = &quot;你的PAT&quot;
+JWT_SECRET = &quot;openssl rand -base64 32 生成&quot;
+CALLBACK_SECRET = &quot;openssl rand -base64 32 生成&quot;
+JUDGE_REPO = &quot;你的用户名/ccoj-judge&quot;
+FRONTEND_URL = &quot;https://你的域名&quot;
+REGISTRATION_OPEN = &quot;true&quot;
+DEFAULT_FROM_EMAIL = &quot;noreply@你的域名&quot;
+CPOAUTH_CLIENT_ID = &quot;&quot;
+CPOAUTH_CLIENT_SECRET = &quot;&quot;
+</code></pre>
+<h2 id="6-创建-GitHub-OAuth-App"><a href="#6-创建-GitHub-OAuth-App" class="headerlink" title="6. 创建 GitHub OAuth App"></a>6. 创建 GitHub OAuth App</h2><p>地址：<a target="_blank" rel="noopener" href="https://github.com/settings/developers">https://github.com/settings/developers</a></p>
+<p>回调地址：https:&#x2F;&#x2F;你的域名&#x2F;api&#x2F;v1&#x2F;auth&#x2F;github&#x2F;callback</p>
+<p>拿到 Client ID 和 Client Secret 填入上面的配置。1</p>
+<h2 id="7-创建判题仓库"><a href="#7-创建判题仓库" class="headerlink" title="7. 创建判题仓库"></a>7. 创建判题仓库</h2><p>GitHub 新建 Private 仓库：<del>xxx-judge</del></p>
+<p>推送本地 judge-repo 内容：</p>
+<pre><code class="bash">cd ~/Code/eoj/judge-repo
+git init
+git add .
+git commit -m &quot;init judge repo&quot;
+git remote add origin git@github.com:你的用户名/ccoj-judge.git
+git branch -M main
+git push -u origin main
+</code></pre>
+<h2 id="8-配置判题仓库-Secrets"><a href="#8-配置判题仓库-Secrets" class="headerlink" title="8. 配置判题仓库 Secrets"></a>8. 配置判题仓库 Secrets</h2><p>地址：<code>https://github.com/你的用户名/ccoj-judge/settings/secrets/actions</code></p>
+<table>
+<thead>
+<tr>
+<th>Secret 名</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>WORKER_API</code></td>
+<td><code>https://你的域名</code></td>
+</tr>
+<tr>
+<td><code>CALLBACK_SECRET</code></td>
+<td>和 wrangler.toml 里一致</td>
+</tr>
+</tbody></table>
+<h2 id="9-构建前端-部署后端"><a href="#9-构建前端-部署后端" class="headerlink" title="9. 构建前端 + 部署后端"></a>9. 构建前端 + 部署后端</h2><pre><code class="bash">cd ~/Code/eoj/frontend
+npm run build:site
+
+cd ../backend
+npx wrangler deploy
+</code></pre>
+<h2 id="10-绑定自定义域名"><a href="#10-绑定自定义域名" class="headerlink" title="10. 绑定自定义域名"></a>10. 绑定自定义域名</h2><p>Cloudflare → <strong>Workers 和 Pages</strong> → <code>oj-backend</code> → <strong>设置</strong> → <strong>域和路由</strong> → <strong>添加域名</strong> → 输入域名。</p>
+<h2 id="11-设置管理员"><a href="#11-设置管理员" class="headerlink" title="11. 设置管理员"></a>11. 设置管理员</h2><pre><code class="bash">npx wrangler d1 execute oj-database --remote --command &quot;UPDATE users SET role = &#39;admin&#39;, permissions = &#39;[\&quot;contest_admin\&quot;,\&quot;problem_admin\&quot;,\&quot;list_admin\&quot;,\&quot;ticket_admin\&quot;]&#39; WHERE username = &#39;你的用户名&#39;;&quot;
+</code></pre>
+<hr>
+<h1 id="二、日常更新"><a href="#二、日常更新" class="headerlink" title="二、日常更新"></a>二、日常更新</h1><h2 id="场景-A：只改前端（站点名、图标、主题、页面）"><a href="#场景-A：只改前端（站点名、图标、主题、页面）" class="headerlink" title="场景 A：只改前端（站点名、图标、主题、页面）"></a>场景 A：只改前端（站点名、图标、主题、页面）</h2><pre><code class="bash">cd ~/Code/eoj/frontend
+npm run build:site
+cd ../backend
+npx wrangler deploy
+</code></pre>
+<h2 id="场景-B：只改后端（API、逻辑、数据库操作）"><a href="#场景-B：只改后端（API、逻辑、数据库操作）" class="headerlink" title="场景 B：只改后端（API、逻辑、数据库操作）"></a>场景 B：只改后端（API、逻辑、数据库操作）</h2><pre><code class="bash">cd ~/Code/eoj/backend
+npx wrangler deploy
+</code></pre>
+<h2 id="场景-C：前后端都改了"><a href="#场景-C：前后端都改了" class="headerlink" title="场景 C：前后端都改了"></a>场景 C：前后端都改了</h2><pre><code class="bash">cd ~/Code/eoj/frontend
+npm run build:site
+cd ../backend
+npx wrangler deploy
+</code></pre>
+<h2 id="场景-D：改了判题逻辑（judge-sh、judge-yml）"><a href="#场景-D：改了判题逻辑（judge-sh、judge-yml）" class="headerlink" title="场景 D：改了判题逻辑（judge.sh、judge.yml）"></a>场景 D：改了判题逻辑（judge.sh、judge.yml）</h2><pre><code class="bash">cd ~/Code/eoj/judge-repo
+git add .
+git commit -m &quot;更新判题逻辑&quot;
+git pull --rebase origin main
+git push
+</code></pre>
+<blockquote>
+<p>注意：<code>judge-repo</code> 每次 EOJ 提交代码都会自动推送，所以本地推之前**必须先 <code>git pull --rebase</code>**。</p>
+</blockquote>
+<h2 id="场景-E：改了数据库结构"><a href="#场景-E：改了数据库结构" class="headerlink" title="场景 E：改了数据库结构"></a>场景 E：改了数据库结构</h2><pre><code class="bash">cd ~/Code/eoj/backend
+npx wrangler d1 migrations apply oj-database --remote
+</code></pre>
+<hr>
+<h1 id="三、常用排查命令"><a href="#三、常用排查命令" class="headerlink" title="三、常用排查命令"></a>三、常用排查命令</h1><pre><code class="bash"># 查看用户列表和角色
+npx wrangler d1 execute oj-database --remote --command &quot;SELECT id, username, role FROM users;&quot;
+
+# 查看提交记录
+npx wrangler d1 execute oj-database --remote --command &quot;SELECT id, user_id, problem_id, status FROM submissions ORDER BY id DESC LIMIT 10;&quot;
+
+# 实时查看 Worker 日志
+npx wrangler tail
+
+# 查看数据库所有表
+npx wrangler d1 execute oj-database --remote --command &quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;;&quot;
+</code></pre>
+<hr>
+<h1 id="四、关键路径速查"><a href="#四、关键路径速查" class="headerlink" title="四、关键路径速查"></a>四、关键路径速查</h1><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目根目录</td>
+<td><code>~/Code/eoj</code></td>
+</tr>
+<tr>
+<td>前端源码</td>
+<td><code>~/Code/eoj/frontend</code></td>
+</tr>
+<tr>
+<td>前端配置</td>
+<td><code>~/Code/eoj/frontend/config.yaml</code></td>
+</tr>
+<tr>
+<td>后端源码</td>
+<td><code>~/Code/eoj/backend</code></td>
+</tr>
+<tr>
+<td>后端配置</td>
+<td><code>~/Code/eoj/backend/wrangler.toml</code></td>
+</tr>
+<tr>
+<td>判题仓库</td>
+<td><code>~/Code/eoj/judge-repo</code></td>
+</tr>
+<tr>
+<td>判题脚本</td>
+<td><code>~/Code/eoj/judge-repo/scripts/judge.sh</code></td>
+</tr>
+<tr>
+<td>判题工作流</td>
+<td><code>~/Code/eoj/judge-repo/.github/workflows/judge.yml</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="五、核心规律"><a href="#五、核心规律" class="headerlink" title="五、核心规律"></a>五、核心规律</h1><blockquote>
+<p><strong>改前端 → 必须 <code>npm run build:site</code> + <code>wrangler deploy</code></strong><br><strong>改后端 → <code>wrangler deploy</code></strong><br><strong>改判题 → <code>git pull --rebase</code> + <code>git push</code></strong></p>
+</blockquote>
+<p>谔谔谔终于写完了谔谔谔</p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 CC-Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;XXS
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+<script
+    src="https://giscus.app/client.js"
+    data-repo="chentucheng/chentucheng.github.io"
+    data-repo-id="R_kgDOTArErQ"
+    data-category="Blog Comments"
+    data-category-id="DIC_kwDOTArErc4DACec"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+    
+</body>
+</html>
