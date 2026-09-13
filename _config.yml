@@ -107,7 +107,7 @@ theme: particlex
 # Deployment
 deploy:
   type: git
-  repo: https://github.com/chentucheng/chentucheng.github.io.git
+  repo: git@github.com:chentucheng/chentucheng.github.io.git
   branch: gh-pages
 
 # 加密插件配置
