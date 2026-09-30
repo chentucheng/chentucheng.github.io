@@ -32,6 +32,8 @@ skip_render:
   - 'oi-wiki/**'
   - 'Game/xyc/**'
   - 'Game/OItrainer-main/**'
+  - 'Game/trust/**'
+  - 'Game/oi-remake-game-main/**'
 
 # Writing
 new_post_name: :title.md # File name of new posts

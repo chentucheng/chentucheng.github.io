@@ -10,4 +10,6 @@ layout: page
 
 [xyc模拟器（upd from 1000CC）](/Game/OItrainer-main)
 
+[信任的进化-zh](/Game/trust)
+
 部分游戏有一部分小Bug，正在狂修中……
